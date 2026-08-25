@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>GoodKnocks — The Heirloom Low-Profile Keyboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- SVG Filters for subtle film grain -->
+  <svg class="svg-filters" aria-hidden="true">
+    <defs>
+      <filter id="grain-filter" x="0" y="0" width="100%" height="100%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" result="noise"/>
+        <feColorMatrix in="noise" type="saturate" values="0" result="mono"/>
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- Film Grain Overlay -->
+  <div class="grain-overlay" aria-hidden="true"></div>
+
+  <!-- ============================= HERO ============================= -->
+  <section id="hero" class="section active" data-section="hero">
+    <div class="hero-bg">
+      <img
+        src="hero-keyboard.jpg"
+        alt="GoodKnocks low-profile keyboard on woodgrain desk"
+        fetchpriority="high"
+        draggable="false"
+      >
+      <div class="hero-vignette"></div>
+    </div>
+    <div class="hero-content">
+      <img src="GoodKnocksa logo.png" alt="GoodKnocks" class="hero-logo">
+      <h1 class="hero-title" aria-label="The First Keystroke You'll Never Forget">
+        <span class="hero-typed-text" id="hero-typed-text"></span><span class="typing-cursor" id="typing-cursor" aria-hidden="true"></span>
+      </h1>
+      <p class="hero-subtitle">
+        Machined to be trusted. Sculpted to be cherished.<br>
+        Your first bespoke instrument should carry the quiet weight of honor and pride.
+      </p>
+      <button class="cta-button" id="cta-make-yours">
+        <span>Craft Yours Now</span>
+        <svg class="cta-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- ============================= STORY ============================= -->
+  <section id="story" class="section" data-section="story">
+    <div class="story-content">
+      <div class="story-eyebrow">Our Philosophy</div>
+      <h2 class="story-title">In the Silver Light<br>of a Pure Keystroke</h2>
+      <div class="story-body">
+        <p>There is an indelible truth in vintage silvertone photography — quiet permanence, tangible texture, and the warmth of an artifact made to outlive fleeting digital noise. That is how we engineer keyboards.</p>
+        <p>Every GoodKnocks instrument is milled from a monolithic block of aerospace aluminum. It is built upon a single conviction: your first custom keyboard should be the trusted companion you rely on for every manuscript, line of code, and quiet breakthrough.</p>
+        <p>We do not make disposable electronics. We sculpt heirlooms.</p>
+      </div>
+      <div class="story-values">
+        <div class="story-value">
+          <span class="value-number">01</span>
+          <div class="value-text">
+            <span class="value-label">Reliability You Can Feel</span>
+            <span class="value-desc">Custom gasket suspension and hot-swappable sockets rated for fifty million flawless actuations.</span>
+          </div>
+        </div>
+        <div class="story-value">
+          <span class="value-number">02</span>
+          <div class="value-text">
+            <span class="value-label">Sculpted Low-Profile Unibody</span>
+            <span class="value-desc">Zero wrist strain by design. Slim, ergonomic contours precision CNC-milled with sub-micron tolerances.</span>
+          </div>
+        </div>
+        <div class="story-value">
+          <span class="value-number">03</span>
+          <div class="value-text">
+            <span class="value-label">Pride in Every Keystroke</span>
+            <span class="value-desc">A deep acoustic signature tuned like a concert piano. An instrument you feel genuine honor to create upon.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== STEP 1: CHASSIS & FINISH ======================== -->
+  <section id="step-body" class="section config-section" data-section="step-body">
+    <div class="config-header">
+      <span class="step-label">Step 01 of 03</span>
+      <h2 class="step-title">Choose Your Canvas</h2>
+      <p class="step-subtitle">Select the low-profile unibody chassis tone and surface finish</p>
+    </div>
+    <div class="config-body">
+      <div class="keyboard-preview-container" id="preview-body">
+        <svg class="keyboard-svg" viewBox="0 0 900 440" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="desk-shadow" x="-10%" y="-10%" width="120%" height="130%">
+              <feDropShadow dx="0" dy="24" stdDeviation="28" flood-color="#000000" flood-opacity="0.6"/>
+            </filter>
+            <linearGradient id="finish-grad-metallic" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="rgba(255,255,255,0.02)"/>
+              <stop offset="30%" stop-color="rgba(255,255,255,0.18)"/>
+              <stop offset="50%" stop-color="rgba(255,255,255,0.32)"/>
+              <stop offset="70%" stop-color="rgba(255,255,255,0.08)"/>
+              <stop offset="100%" stop-color="rgba(255,255,255,0.01)"/>
+            </linearGradient>
+            <linearGradient id="finish-grad-gloss" x1="0%" y1="0%" x2="100%" y2="60%">
+              <stop offset="0%" stop-color="rgba(255,255,255,0)"/>
+              <stop offset="25%" stop-color="rgba(255,255,255,0.45)"/>
+              <stop offset="40%" stop-color="rgba(255,255,255,0.7)"/>
+              <stop offset="60%" stop-color="rgba(255,255,255,0.1)"/>
+              <stop offset="100%" stop-color="rgba(255,255,255,0.01)"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Ambient shadow on desk -->
+          <rect class="kb-shadow" x="120" y="80" width="660" height="280" rx="24" fill="#000" opacity="0.4" filter="url(#desk-shadow)"/>
+
+          <!-- Main Unibody Aluminum Case -->
+          <rect class="kb-chassis" x="120" y="60" width="660" height="295" rx="18"/>
+
+          <!-- Surface Finish Highlight Overlay -->
+          <rect class="kb-finish-highlight" x="120" y="60" width="660" height="295" rx="18" fill="none"/>
+
+          <!-- Beveled Perimeter Chamfer (Accent trim) -->
+          <rect class="kb-accent-chamfer" x="121" y="61" width="658" height="293" rx="17" fill="none" stroke-width="1.5"/>
+
+          <!-- Top Accent Weight Bar -->
+          <rect class="kb-accent-bar" x="150" y="70" width="110" height="4" rx="2"/>
+
+          <!-- Interior Plate Recess -->
+          <rect class="kb-plate" x="138" y="82" width="624" height="255" rx="10"/>
+
+          <!-- Switch underglow aura -->
+          <rect class="kb-switch-aura" x="142" y="86" width="616" height="247" rx="8" fill="none"/>
+
+          <!-- CNC Rotary Encoder Knob (Accent) -->
+          <g class="kb-rotary-knob" transform="translate(734, 106)">
+            <circle class="knob-outer kb-accent-element" r="16"/>
+            <circle class="knob-inner" r="12"/>
+            <circle class="knob-center" r="5"/>
+            <line class="knob-notch kb-accent-notch" x1="0" y1="-12" x2="0" y2="-4" stroke-width="2"/>
+          </g>
+
+          <!-- Status Indicator LEDs -->
+          <circle class="kb-led kb-accent-led" cx="698" cy="106" r="2.5"/>
+          <circle class="kb-led" cx="686" cy="106" r="2" opacity="0.3"/>
+
+          <!-- Keycaps Grid (Low Profile 75% Layout) -->
+          <g class="kb-keycaps">
+            <!-- Row 1: Function Keys -->
+            <rect class="kb-key" x="146" y="90" width="30" height="24" rx="4"/>
+            <rect class="kb-key" x="182" y="90" width="30" height="24" rx="4"/>
+            <rect class="kb-key" x="216" y="90" width="30" height="24" rx="4"/>
+            <rect class="kb-key" x="250" y="90" width="30" height="24" rx="4"/>
+            <rect class="kb-key" x="284" y="90" width="30" height="24" rx="4"/>
+            <rect class="kb-key" x="326" y="90" width="30" height="24" rx="4"/>
+            <rect class="kb-key" x="360" y="90" width="30" height="24" rx="4"/>
+            <rect class="kb-key" x="394" y="90" width="30" height="24" rx="4"/>
+            <rect class="kb-key" x="428" y="90" width="30" height="24" rx="4"/>
+            <rect class="kb-key" x="470" y="90" width="30" height="24" rx="4"/>
+            <rect class="kb-key" x="504" y="90" width="30" height="24" rx="4"/>
+            <rect class="kb-key" x="538" y="90" width="30" height="24" rx="4"/>
+            <rect class="kb-key" x="572" y="90" width="30" height="24" rx="4"/>
+            <rect class="kb-key kb-key-nav" x="614" y="90" width="32" height="24" rx="4"/>
+            <rect class="kb-key kb-key-nav" x="650" y="90" width="32" height="24" rx="4"/>
+
+            <!-- Row 2: Numbers -->
+            <rect class="kb-key" x="146" y="122" width="32" height="34" rx="5"/>
+            <rect class="kb-key" x="182" y="122" width="32" height="34" rx="5"/>
+            <rect class="kb-key" x="218" y="122" width="32" height="34" rx="5"/>
+            <rect class="kb-key" x="254" y="122" width="32" height="34" rx="5"/>
+            <rect class="kb-key" x="290" y="122" width="32" height="34" rx="5"/>
+            <rect class="kb-key" x="326" y="122" width="32" height="34" rx="5"/>
+            <rect class="kb-key" x="362" y="122" width="32" height="34" rx="5"/>
+            <rect class="kb-key" x="398" y="122" width="32" height="34" rx="5"/>
+            <rect class="kb-key" x="434" y="122" width="32" height="34" rx="5"/>
+            <rect class="kb-key" x="470" y="122" width="32" height="34" rx="5"/>
+            <rect class="kb-key" x="506" y="122" width="32" height="34" rx="5"/>
+            <rect class="kb-key" x="542" y="122" width="32" height="34" rx="5"/>
+            <rect class="kb-key" x="578" y="122" width="32" height="34" rx="5"/>
+            <rect class="kb-key kb-key-mod" x="614" y="122" width="68" height="34" rx="5"/>
+            <rect class="kb-key kb-key-nav" x="686" y="122" width="32" height="34" rx="5"/>
+            <rect class="kb-key kb-key-nav" x="722" y="122" width="32" height="34" rx="5"/>
+
+            <!-- Row 3: QWERTY -->
+            <rect class="kb-key kb-key-mod" x="146" y="160" width="48" height="34" rx="5"/>
+            <rect class="kb-key" x="198" y="160" width="32" height="34" rx="5"/>
+            <rect class="kb-key" x="234" y="160" width="32" height="34" rx="5"/>
+            <rect class="kb-key" x="270" y="160" width="32" height="34" rx="5"/>
+            <rect class="kb-key" x="306" y="160" width="32" height="34" rx="5"/>
+            <rect class="kb-key" x="342" y="160" width="32" height="34" rx="5"/>
+            <rect class="kb-key" x="378" y="160" width="32" height="34" rx="5"/>
+            <rect class="kb-key" x="414" y="160" width="32" height="34" rx="5"/>
+            <rect class="kb-key" x="450" y="160" width="32" height="34" rx="5"/>
+            <rect class="kb-key" x="486" y="160" width="32" height="34" rx="5"/>
+            <rect class="kb-key" x="522" y="160" width="32" height="34" rx="5"/>
+            <rect class="kb-key" x="558" y="160" width="32" height="34" rx="5"/>
+            <rect class="kb-key" x="594" y="160" width="32" height="34" rx="5"/>
+            <rect class="kb-key kb-key-mod" x="630" y="160" width="52" height="34" rx="5"/>
+            <rect class="kb-key kb-key-nav" x="686" y="160" width="32" height="34" rx="5"/>
+            <rect class="kb-key kb-key-nav" x="722" y="160" width="32" height="34" rx="5"/>
+
+            <!-- Row 4: Home Row -->
+            <rect class="kb-key kb-key-mod" x="146" y="198" width="58" height="34" rx="5"/>
+            <rect class="kb-key" x="208" y="198" width="32" height="34" rx="5"/>
+            <rect class="kb-key" x="244" y="198" width="32" height="34" rx="5"/>
+            <rect class="kb-key" x="280" y="198" width="32" height="34" rx="5"/>
+            <rect class="kb-key" x="316" y="198" width="32" height="34" rx="5"/>
+            <rect class="kb-key" x="352" y="198" width="32" height="34" rx="5"/>
+            <rect class="kb-key" x="388" y="198" width="32" height="34" rx="5"/>
+            <rect class="kb-key" x="424" y="198" width="32" height="34" rx="5"/>
+            <rect class="kb-key" x="460" y="198" width="32" height="34" rx="5"/>
+            <rect class="kb-key" x="496" y="198" width="32" height="34" rx="5"/>
+            <rect class="kb-key" x="532" y="198" width="32" height="34" rx="5"/>
+            <rect class="kb-key" x="568" y="198" width="32" height="34" rx="5"/>
+            <rect class="kb-key kb-key-accent kb-accent-element" x="604" y="198" width="78" height="34" rx="5"/>
+            <rect class="kb-key kb-key-nav" x="686" y="198" width="32" height="34" rx="5"/>
+            <rect class="kb-key kb-key-nav" x="722" y="198" width="32" height="34" rx="5"/>
+
+            <!-- Row 5: Shift Row -->
+            <rect class="kb-key kb-key-mod" x="146" y="236" width="76" height="34" rx="5"/>
+            <rect class="kb-key" x="226" y="236" width="32" height="34" rx="5"/>
+            <rect class="kb-key" x="262" y="236" width="32" height="34" rx="5"/>
+            <rect class="kb-key" x="298" y="236" width="32" height="34" rx="5"/>
+            <rect class="kb-key" x="334" y="236" width="32" height="34" rx="5"/>
+            <rect class="kb-key" x="370" y="236" width="32" height="34" rx="5"/>
+            <rect class="kb-key" x="406" y="236" width="32" height="34" rx="5"/>
+            <rect class="kb-key" x="442" y="236" width="32" height="34" rx="5"/>
+            <rect class="kb-key" x="478" y="236" width="32" height="34" rx="5"/>
+            <rect class="kb-key" x="514" y="236" width="32" height="34" rx="5"/>
+            <rect class="kb-key" x="550" y="236" width="32" height="34" rx="5"/>
+            <rect class="kb-key kb-key-mod" x="586" y="236" width="60" height="34" rx="5"/>
+            <rect class="kb-key kb-key-nav" x="650" y="236" width="32" height="34" rx="5"/>
+            <rect class="kb-key kb-key-nav" x="686" y="236" width="32" height="34" rx="5"/>
+            <rect class="kb-key kb-key-nav" x="722" y="236" width="32" height="34" rx="5"/>
+
+            <!-- Row 6: Bottom Row with Spacebar -->
+            <rect class="kb-key kb-key-mod" x="146" y="274" width="42" height="34" rx="5"/>
+            <rect class="kb-key kb-key-mod" x="192" y="274" width="38" height="34" rx="5"/>
+            <rect class="kb-key kb-key-mod" x="234" y="274" width="46" height="34" rx="5"/>
+            <rect class="kb-key kb-key-space" x="284" y="274" width="226" height="34" rx="5"/>
+            <rect class="kb-key kb-key-mod" x="514" y="274" width="46" height="34" rx="5"/>
+            <rect class="kb-key kb-key-mod" x="564" y="274" width="38" height="34" rx="5"/>
+            <rect class="kb-key kb-key-nav" x="606" y="274" width="34" height="34" rx="5"/>
+            <rect class="kb-key kb-key-nav" x="644" y="274" width="34" height="34" rx="5"/>
+            <rect class="kb-key kb-key-nav" x="682" y="274" width="34" height="34" rx="5"/>
+            <rect class="kb-key kb-key-nav" x="720" y="274" width="34" height="34" rx="5"/>
+          </g>
+
+          <!-- Subtle Front Edge Light Highlight -->
+          <line class="kb-edge-highlight" x1="138" y1="353" x2="762" y2="353" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+        </svg>
+
+        <div class="preview-label">
+          <span class="preview-change-indicator" id="body-change-label">Obsidian Noir · Bead-Blasted Matte</span>
+        </div>
+      </div>
+
+      <div class="options-panel">
+        <div class="options-group">
+          <h3 class="options-label">Chassis Material &amp; Tone</h3>
+          <div class="options-row">
+            <button class="option-card color-option selected" data-color="obsidian" data-hex="#18181a">
+              <span class="color-swatch" style="background:#18181a; border: 1px solid #333333;"></span>
+              <div class="option-meta">
+                <span class="option-name">Obsidian Noir</span>
+                <span class="option-desc">Deep anodized black with quiet density</span>
+              </div>
+            </button>
+            <button class="option-card color-option" data-color="silver" data-hex="#dcd7ce">
+              <span class="color-swatch" style="background:#dcd7ce"></span>
+              <div class="option-meta">
+                <span class="option-name">Silver Gelatin</span>
+                <span class="option-desc">Lustrous raw aluminum, vintage print tone</span>
+              </div>
+            </button>
+            <button class="option-card color-option" data-color="indigo" data-hex="#17202e">
+              <span class="color-swatch" style="background:#17202e"></span>
+              <div class="option-meta">
+                <span class="option-name">Midnight Ink</span>
+                <span class="option-desc">Subtle twilight blue with mineral warmth</span>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <div class="options-group">
+          <h3 class="options-label">Surface Treatment</h3>
+          <div class="finish-toggle">
+            <button class="finish-btn selected" data-finish="matte">Matte Blasted</button>
+            <button class="finish-btn" data-finish="metallic">Brushed Satin</button>
+            <button class="finish-btn" data-finish="gloss">Mirror Chamfer</button>
+            <div class="finish-indicator"></div>
+          </div>
+        </div>
+
+        <p class="selected-option-desc" id="body-selected-desc">Deep anodized black with quiet density</p>
+      </div>
+    </div>
+
+    <div class="config-footer">
+      <button class="btn-back" data-goto="hero">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back
+      </button>
+      <div class="step-dots">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+      <button class="btn-next" data-goto="step-wheels">
+        Next
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- ======================== STEP 2: LOW-PROFILE SWITCH INTERNALS ======================== -->
+  <section id="step-wheels" class="section config-section" data-section="step-wheels">
+    <div class="config-header">
+      <span class="step-label">Step 02 of 03</span>
+      <h2 class="step-title">Define Your Touch</h2>
+      <p class="step-subtitle">Inspect the internal anatomy &amp; acoustic engineering of your switch</p>
+    </div>
+    <div class="config-body">
+      <!-- Dedicated Switch Cutaway / Internals Visualizer -->
+      <div class="switch-preview-container" id="preview-switch-internals">
+        <div class="switch-diagram-wrap">
+          <svg class="switch-svg" viewBox="0 0 480 340" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="switch-glow" x="-20%" y="-20%" width="140%" height="140%">
+                <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.5"/>
+              </filter>
+              <linearGradient id="polycarb-housing" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="rgba(255,255,255,0.18)"/>
+                <stop offset="40%" stop-color="rgba(255,255,255,0.06)"/>
+                <stop offset="100%" stop-color="rgba(255,255,255,0.02)"/>
+              </linearGradient>
+              <linearGradient id="spring-gold" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#a8894d"/>
+                <stop offset="50%" stop-color="#e2c98d"/>
+                <stop offset="100%" stop-color="#917337"/>
+              </linearGradient>
+              <linearGradient id="contact-gold" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#f0d59e"/>
+                <stop offset="100%" stop-color="#c9a96e"/>
+              </linearGradient>
+            </defs>
+
+            <!-- Base Ground Shadow -->
+            <ellipse cx="240" cy="305" rx="170" ry="14" fill="#000" opacity="0.4" filter="url(#switch-glow)"/>
+
+            <!-- Bottom Housing & Hot-swap Base -->
+            <path class="switch-base-housing" d="M130,230 L350,230 L360,265 L330,285 L150,285 L120,265 Z" fill="#141312" stroke="rgba(255,255,255,0.08)" stroke-width="1.2"/>
+            <rect class="switch-latch" x="105" y="222" width="270" height="12" rx="4" fill="#1b1a19" stroke="rgba(255,255,255,0.06)"/>
+
+            <!-- PCB Pins -->
+            <rect x="200" y="285" width="6" height="28" rx="2" fill="#a37e36"/>
+            <rect x="274" y="285" width="6" height="22" rx="2" fill="#a37e36"/>
+            <circle cx="240" cy="285" r="7" fill="#1f1e1c"/>
+
+            <!-- Gold Cross-Point Leaf Contacts -->
+            <g class="switch-leaf-group">
+              <path class="switch-leaf-static" d="M290,265 L290,195 L282,185" fill="none" stroke="url(#contact-gold)" stroke-width="2.5" stroke-linecap="round"/>
+              <path class="switch-leaf-moving" d="M272,265 L272,198 L278,188" fill="none" stroke="url(#contact-gold)" stroke-width="2" stroke-linecap="round"/>
+              <!-- Spark / Actuation contact point indicator -->
+              <circle class="switch-contact-dot" cx="280" cy="186" r="3" fill="#ffffff" opacity="0.8"/>
+            </g>
+
+            <!-- Clickbar Mechanism (Visible only on Clicky switch) -->
+            <g class="switch-clickbar-group" style="display:none;">
+              <path class="switch-clickbar" d="M175,250 L175,190 Q175,178 185,175 L196,172" fill="none" stroke="#dcdcdc" stroke-width="2.2" stroke-linecap="round"/>
+              <circle cx="196" cy="172" r="3.5" fill="#f5f5f5"/>
+            </g>
+
+            <!-- Internal Precision Spring -->
+            <g class="switch-spring-group" transform="translate(240, 165)">
+              <line x1="-12" y1="0" x2="12" y2="4" stroke="url(#spring-gold)" stroke-width="3" stroke-linecap="round"/>
+              <line x1="12" y1="4" x2="-12" y2="10" stroke="url(#spring-gold)" stroke-width="3" stroke-linecap="round"/>
+              <line x1="-12" y1="10" x2="12" y2="16" stroke="url(#spring-gold)" stroke-width="3" stroke-linecap="round"/>
+              <line x1="12" y1="16" x2="-12" y2="22" stroke="url(#spring-gold)" stroke-width="3" stroke-linecap="round"/>
+              <line x1="-12" y1="22" x2="12" y2="28" stroke="url(#spring-gold)" stroke-width="3" stroke-linecap="round"/>
+              <line x1="12" y1="28" x2="-12" y2="34" stroke="url(#spring-gold)" stroke-width="3" stroke-linecap="round"/>
+              <line x1="-12" y1="34" x2="12" y2="40" stroke="url(#spring-gold)" stroke-width="3" stroke-linecap="round"/>
+              <line x1="12" y1="40" x2="-12" y2="46" stroke="url(#spring-gold)" stroke-width="3" stroke-linecap="round"/>
+              <line x1="-12" y1="46" x2="12" y2="52" stroke="url(#spring-gold)" stroke-width="3" stroke-linecap="round"/>
+              <line x1="12" y1="52" x2="-12" y2="58" stroke="url(#spring-gold)" stroke-width="3" stroke-linecap="round"/>
+              <line x1="-12" y1="58" x2="0" y2="64" stroke="url(#spring-gold)" stroke-width="3" stroke-linecap="round"/>
+            </g>
+
+            <!-- Polycarbonate Translucent Upper Chamber -->
+            <path class="switch-polycarb-cover" d="M138,222 L170,120 L310,120 L342,222 Z" fill="url(#polycarb-housing)" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+            <line x1="172" y1="122" x2="140" y2="220" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+            <line x1="308" y1="122" x2="340" y2="220" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+
+            <!-- Moving Stem Core -->
+            <g class="switch-stem-assembly" transform="translate(0, 0)">
+              <!-- Cross mount stem post -->
+              <rect class="switch-stem-mount" x="226" y="52" width="28" height="42" rx="4" fill="#c9a96e"/>
+              <rect class="switch-stem-cross-v" x="237" y="58" width="6" height="30" rx="1.5" fill="#141312"/>
+              <rect class="switch-stem-cross-h" x="228" y="70" width="24" height="6" rx="1.5" fill="#141312"/>
+
+              <!-- Stem Slider Body & Cam Legs -->
+              <path class="switch-stem-body" d="M185,94 L295,94 L295,160 L285,178 L265,178 L265,160 L215,160 L215,178 L195,178 L185,160 Z" fill="#c9a96e" opacity="0.95"/>
+
+              <!-- Tactile Bump Cam -->
+              <path class="switch-tactile-cam" d="M285,150 Q292,165 285,178" fill="none" stroke="#ffffff" stroke-width="2.5" opacity="0"/>
+
+              <!-- Linear Glide Rail Highlight -->
+              <line class="switch-glide-rail" x1="192" y1="98" x2="192" y2="155" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+            </g>
+
+            <!-- Technical Callout Lines -->
+            <g class="switch-callout-lines" opacity="0.6">
+              <line x1="150" y1="65" x2="220" y2="65" stroke="var(--text-muted)" stroke-width="1" stroke-dasharray="3,3"/>
+              <text x="75" y="68" fill="var(--text-secondary)" font-size="11" font-family="var(--font-body)">POM Stem</text>
+
+              <line x1="330" y1="195" x2="255" y2="195" stroke="var(--text-muted)" stroke-width="1" stroke-dasharray="3,3"/>
+              <text x="340" y="198" fill="var(--text-secondary)" font-size="11" font-family="var(--font-body)">Gold Spring</text>
+
+              <line x1="330" y1="235" x2="292" y2="235" stroke="var(--text-muted)" stroke-width="1" stroke-dasharray="3,3"/>
+              <text x="340" y="238" fill="var(--text-secondary)" font-size="11" font-family="var(--font-body)">Gold Leaf</text>
+            </g>
+          </svg>
+        </div>
+
+        <!-- Real-time Switch Telemetry & Engineering Specs Bar -->
+        <div class="switch-specs-bar">
+          <div class="spec-metric">
+            <span class="spec-label">Actuation Force</span>
+            <span class="spec-value" id="spec-force">42 gf</span>
+          </div>
+          <div class="spec-metric">
+            <span class="spec-label">Pre-Travel</span>
+            <span class="spec-value" id="spec-pretravel">1.2 mm</span>
+          </div>
+          <div class="spec-metric">
+            <span class="spec-label">Total Travel</span>
+            <span class="spec-value" id="spec-total">3.2 mm</span>
+          </div>
+          <div class="spec-metric">
+            <span class="spec-label">Acoustic Tone</span>
+            <span class="spec-value" id="spec-acoustic">Muted Whisper</span>
+          </div>
+        </div>
+
+        <div class="preview-label">
+          <span class="preview-change-indicator" id="switch-change-label">Velvet Linear · Silent Glide Architecture</span>
+        </div>
+      </div>
+
+      <!-- Options Panel -->
+      <div class="options-panel">
+        <div class="options-group">
+          <h3 class="options-label">Switch Architecture</h3>
+          <div class="options-row">
+            <button class="option-card switch-option selected" data-switch="linear">
+              <div class="switch-icon">
+                <svg viewBox="0 0 40 40" fill="none">
+                  <rect x="6" y="6" width="28" height="28" rx="6" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M14 20h12M20 14v12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <circle cx="20" cy="20" r="3" fill="currentColor"/>
+                </svg>
+              </div>
+              <div class="option-meta">
+                <span class="option-name">Velvet Linear (42gf)</span>
+                <span class="option-desc">Frictionless POM glide rails with dry Krytox film coating</span>
+              </div>
+            </button>
+            <button class="option-card switch-option" data-switch="tactile">
+              <div class="switch-icon">
+                <svg viewBox="0 0 40 40" fill="none">
+                  <rect x="6" y="6" width="28" height="28" rx="6" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M12 25c4-2 6-10 8-10s4 8 8 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle cx="20" cy="15" r="2.5" fill="currentColor"/>
+                </svg>
+              </div>
+              <div class="option-meta">
+                <span class="option-name">Silvertone Tactile (55gf)</span>
+                <span class="option-desc">Articulate tactile bump cam with progressive two-stage return</span>
+              </div>
+            </button>
+            <button class="option-card switch-option" data-switch="clicky">
+              <div class="switch-icon">
+                <svg viewBox="0 0 40 40" fill="none">
+                  <rect x="6" y="6" width="28" height="28" rx="6" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M13 16l5 8 4-5 5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle cx="18" cy="24" r="2" fill="currentColor"/>
+                </svg>
+              </div>
+              <div class="option-meta">
+                <span class="option-name">Acoustic Click (50gf)</span>
+                <span class="option-desc">Integrated stainless clickbar for vintage mechanical typewriter cadence</span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="config-footer">
+      <button class="btn-back" data-goto="step-body">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back
+      </button>
+      <div class="step-dots">
+        <span class="dot"></span>
+        <span class="dot active"></span>
+        <span class="dot"></span>
+      </div>
+      <button class="btn-next" data-goto="step-accent">
+        Next
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- ======================== STEP 3: ACCENT PLATE & DIAL ======================== -->
+  <section id="step-accent" class="section config-section" data-section="step-accent">
+    <div class="config-header">
+      <span class="step-label">Step 03 of 03</span>
+      <h2 class="step-title">Add Your Signature</h2>
+      <p class="step-subtitle">The rotary dial, brass weight, and enter accent that seals your build</p>
+    </div>
+    <div class="config-body">
+      <div class="keyboard-preview-container" id="preview-accent">
+        <!-- Full Keyboard SVG cloned by JS -->
+      </div>
+      <div class="options-panel">
+        <div class="options-group">
+          <h3 class="options-label">Accent Trim &amp; Rotary Dial</h3>
+          <div class="options-row">
+            <button class="option-card accent-option selected" data-accent="gold" data-hex="#c9a96e">
+              <span class="color-swatch" style="background: linear-gradient(135deg, #c9a96e, #e4d1aa, #c9a96e)"></span>
+              <div class="option-meta">
+                <span class="option-name">Champagne Brass</span>
+                <span class="option-desc">Warm PVD gold rotary knob and perimeter chamfer</span>
+              </div>
+            </button>
+            <button class="option-card accent-option" data-accent="rose" data-hex="#b76e79">
+              <span class="color-swatch" style="background: linear-gradient(135deg, #b76e79, #d697a0, #b76e79)"></span>
+              <div class="option-meta">
+                <span class="option-name">Smoked Copper</span>
+                <span class="option-desc">Earthy vintage patina with warm tactile presence</span>
+              </div>
+            </button>
+            <button class="option-card accent-option" data-accent="silver" data-hex="#d4d4d4">
+              <span class="color-swatch" style="background: linear-gradient(135deg, #a8a8a8, #eaeaea, #a8a8a8)"></span>
+              <div class="option-meta">
+                <span class="option-name">Polished Chromium</span>
+                <span class="option-desc">Mirror-bright silver gelatin luster and timeless contrast</span>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <p class="selected-option-desc" id="accent-selected-desc">Warm PVD gold rotary knob and perimeter chamfer</p>
+      </div>
+    </div>
+    <div class="config-footer">
+      <button class="btn-back" data-goto="step-wheels">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back
+      </button>
+      <div class="step-dots">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot active"></span>
+      </div>
+      <button class="btn-next btn-confirm" data-goto="congrats">
+        Confirm
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- ======================== CONGRATS (FULL KEYBOARD) ======================== -->
+  <section id="congrats" class="section" data-section="congrats">
+    <div class="congrats-content">
+      <div class="congrats-badge">
+        <svg class="congrats-check" width="60" height="60" viewBox="0 0 64 64" fill="none">
+          <circle cx="32" cy="32" r="30" stroke="currentColor" stroke-width="1.8"/>
+          <path class="check-path" d="M20 32l8 8 16-16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h2 class="congrats-title">Your GoodKnocks<br>Is Configured</h2>
+      <p class="congrats-subtitle">An heirloom instrument worthy of every thought you will ever commit to print.</p>
+      <div class="congrats-summary" id="config-summary">
+        <!-- Filled by JS -->
+      </div>
+      <div class="congrats-keyboard-preview" id="congrats-preview">
+        <!-- Final Keyboard SVG cloned by JS -->
+      </div>
+      <button class="cta-button cta-build" id="cta-build">
+        <span>Watch It Being Crafted</span>
+        <svg class="cta-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- ======================== BUILD SIMULATION WITH MANUFACTURING VIDEOS ======================== -->
+  <section id="building" class="section" data-section="building">
+    <!-- Process Checkpoint Background Videos with Silvertone Filter, Gaussian Blur & Film Grain -->
+    <div class="build-bg-videos" aria-hidden="true">
+      <video class="build-video active" data-video-stage="0" src="https://videos.pexels.com/video-files/31474685/13420521_3840_2160_30fps.mp4" autoplay loop muted playsinline preload="auto"></video>
+      <video class="build-video" data-video-stage="1" src="https://videos.pexels.com/video-files/6263485/6263485-uhd_3840_2160_25fps.mp4" loop muted playsinline preload="auto"></video>
+      <video class="build-video" data-video-stage="2" src="https://videos.pexels.com/video-files/854027/854027-hd_1920_1080_30fps.mp4" loop muted playsinline preload="auto"></video>
+      <video class="build-video" data-video-stage="3" src="https://www.shutterstock.com/shutterstock/videos/4112908095/preview/stock-footage-close-up-side-view-of-person-using-keycap-puller-tool-to-remove-keys-from-mechanical-keyboard-for.webm" loop muted playsinline preload="auto"></video>
+      <video class="build-video" data-video-stage="4" src="https://videos.pexels.com/video-files/8128023/8128023-uhd_2160_3840_25fps.mp4" loop muted playsinline preload="auto"></video>
+      <video class="build-video" data-video-stage="5" src="https://videos.pexels.com/video-files/13807464/13807464-uhd_3840_2160_25fps.mp4" loop muted playsinline preload="auto"></video>
+      <video class="build-video" data-video-stage="6" src="https://videos.pexels.com/video-files/5968349/5968349-uhd_4096_2160_25fps.mp4" loop muted playsinline preload="auto"></video>
+      <div class="build-video-scrim"></div>
+      <div class="build-video-grain"></div>
+    </div>
+
+    <div class="build-content">
+      <h2 class="build-title">Crafting Your GoodKnocks</h2>
+      <p class="build-subtitle">Every bespoke instrument is milled and calibrated to individual order.</p>
+      <div class="build-progress-bar">
+        <div class="build-progress-fill" id="build-progress"></div>
+      </div>
+      <div class="build-stages" id="build-stages">
+        <div class="build-stage active" data-stage="0">
+          <div class="stage-icon-wrap">
+            <svg class="switch-loader-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="11" y1="26" x2="11" y2="30" stroke="#a37e36" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="21" y1="26" x2="21" y2="30" stroke="#a37e36" stroke-width="1.5" stroke-linecap="round"/>
+              <rect x="5" y="18" width="22" height="8" rx="2" fill="#201e1d" stroke="rgba(255,255,255,0.12)" stroke-width="0.8"/>
+              <path d="M7 18 L9.5 12 L22.5 12 L25 18 Z" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.16)" stroke-width="0.8"/>
+              <path class="loader-spring" d="M16 13 L14 15 L18 17 L14 19 L16 21" fill="none" stroke="#c9a96e" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle class="loader-spark" cx="16" cy="18" r="3" fill="#ffffff"/>
+              <g class="loader-stem">
+                <rect x="13" y="6" width="6" height="8" rx="1" fill="#c9a96e"/>
+                <rect x="5" y="3" width="22" height="6" rx="2" fill="#353330" stroke="rgba(255,255,255,0.22)" stroke-width="0.8"/>
+                <line x1="8" y1="5" x2="24" y2="5" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-linecap="round"/>
+              </g>
+            </svg>
+            <div class="stage-check">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
+            </div>
+          </div>
+          <div class="stage-text">
+            <span class="stage-label">CNC Milling the Unibody</span>
+            <span class="stage-desc">Carving the low-profile chassis from a solid billet of aerospace aluminum…</span>
+          </div>
+          <span class="stage-status">In Progress</span>
+        </div>
+
+        <div class="build-stage" data-stage="1">
+          <div class="stage-icon-wrap">
+            <svg class="switch-loader-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="11" y1="26" x2="11" y2="30" stroke="#a37e36" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="21" y1="26" x2="21" y2="30" stroke="#a37e36" stroke-width="1.5" stroke-linecap="round"/>
+              <rect x="5" y="18" width="22" height="8" rx="2" fill="#201e1d" stroke="rgba(255,255,255,0.12)" stroke-width="0.8"/>
+              <path d="M7 18 L9.5 12 L22.5 12 L25 18 Z" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.16)" stroke-width="0.8"/>
+              <path class="loader-spring" d="M16 13 L14 15 L18 17 L14 19 L16 21" fill="none" stroke="#c9a96e" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle class="loader-spark" cx="16" cy="18" r="3" fill="#ffffff"/>
+              <g class="loader-stem">
+                <rect x="13" y="6" width="6" height="8" rx="1" fill="#c9a96e"/>
+                <rect x="5" y="3" width="22" height="6" rx="2" fill="#353330" stroke="rgba(255,255,255,0.22)" stroke-width="0.8"/>
+                <line x1="8" y1="5" x2="24" y2="5" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-linecap="round"/>
+              </g>
+            </svg>
+            <div class="stage-check">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
+            </div>
+          </div>
+          <div class="stage-text">
+            <span class="stage-label">Surface Anodizing &amp; Finishing</span>
+            <span class="stage-desc" id="paint-desc">Applying your bespoke finish layer by layer…</span>
+          </div>
+          <span class="stage-status">Waiting</span>
+        </div>
+
+        <div class="build-stage" data-stage="2">
+          <div class="stage-icon-wrap">
+            <svg class="switch-loader-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="11" y1="26" x2="11" y2="30" stroke="#a37e36" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="21" y1="26" x2="21" y2="30" stroke="#a37e36" stroke-width="1.5" stroke-linecap="round"/>
+              <rect x="5" y="18" width="22" height="8" rx="2" fill="#201e1d" stroke="rgba(255,255,255,0.12)" stroke-width="0.8"/>
+              <path d="M7 18 L9.5 12 L22.5 12 L25 18 Z" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.16)" stroke-width="0.8"/>
+              <path class="loader-spring" d="M16 13 L14 15 L18 17 L14 19 L16 21" fill="none" stroke="#c9a96e" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle class="loader-spark" cx="16" cy="18" r="3" fill="#ffffff"/>
+              <g class="loader-stem">
+                <rect x="13" y="6" width="6" height="8" rx="1" fill="#c9a96e"/>
+                <rect x="5" y="3" width="22" height="6" rx="2" fill="#353330" stroke="rgba(255,255,255,0.22)" stroke-width="0.8"/>
+                <line x1="8" y1="5" x2="24" y2="5" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-linecap="round"/>
+              </g>
+            </svg>
+            <div class="stage-check">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
+            </div>
+          </div>
+          <div class="stage-text">
+            <span class="stage-label">Gasket Isolation &amp; Acoustic Tuning</span>
+            <span class="stage-desc">Installing multi-layer poron dampening and FR4 flex plate…</span>
+          </div>
+          <span class="stage-status">Waiting</span>
+        </div>
+
+        <div class="build-stage" data-stage="3">
+          <div class="stage-icon-wrap">
+            <svg class="switch-loader-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="11" y1="26" x2="11" y2="30" stroke="#a37e36" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="21" y1="26" x2="21" y2="30" stroke="#a37e36" stroke-width="1.5" stroke-linecap="round"/>
+              <rect x="5" y="18" width="22" height="8" rx="2" fill="#201e1d" stroke="rgba(255,255,255,0.12)" stroke-width="0.8"/>
+              <path d="M7 18 L9.5 12 L22.5 12 L25 18 Z" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.16)" stroke-width="0.8"/>
+              <path class="loader-spring" d="M16 13 L14 15 L18 17 L14 19 L16 21" fill="none" stroke="#c9a96e" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle class="loader-spark" cx="16" cy="18" r="3" fill="#ffffff"/>
+              <g class="loader-stem">
+                <rect x="13" y="6" width="6" height="8" rx="1" fill="#c9a96e"/>
+                <rect x="5" y="3" width="22" height="6" rx="2" fill="#353330" stroke="rgba(255,255,255,0.22)" stroke-width="0.8"/>
+                <line x1="8" y1="5" x2="24" y2="5" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-linecap="round"/>
+              </g>
+            </svg>
+            <div class="stage-check">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
+            </div>
+          </div>
+          <div class="stage-text">
+            <span class="stage-label">Stem Lubing &amp; Switch Seating</span>
+            <span class="stage-desc" id="switch-desc">Hand-lubricating each switch for frictionless glide…</span>
+          </div>
+          <span class="stage-status">Waiting</span>
+        </div>
+
+        <div class="build-stage" data-stage="4">
+          <div class="stage-icon-wrap">
+            <svg class="switch-loader-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="11" y1="26" x2="11" y2="30" stroke="#a37e36" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="21" y1="26" x2="21" y2="30" stroke="#a37e36" stroke-width="1.5" stroke-linecap="round"/>
+              <rect x="5" y="18" width="22" height="8" rx="2" fill="#201e1d" stroke="rgba(255,255,255,0.12)" stroke-width="0.8"/>
+              <path d="M7 18 L9.5 12 L22.5 12 L25 18 Z" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.16)" stroke-width="0.8"/>
+              <path class="loader-spring" d="M16 13 L14 15 L18 17 L14 19 L16 21" fill="none" stroke="#c9a96e" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle class="loader-spark" cx="16" cy="18" r="3" fill="#ffffff"/>
+              <g class="loader-stem">
+                <rect x="13" y="6" width="6" height="8" rx="1" fill="#c9a96e"/>
+                <rect x="5" y="3" width="22" height="6" rx="2" fill="#353330" stroke="rgba(255,255,255,0.22)" stroke-width="0.8"/>
+                <line x1="8" y1="5" x2="24" y2="5" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-linecap="round"/>
+              </g>
+            </svg>
+            <div class="stage-check">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
+            </div>
+          </div>
+          <div class="stage-text">
+            <span class="stage-label">Fitting Keycaps &amp; Rotary Dial</span>
+            <span class="stage-desc">Installing dye-sub PBT keycaps and the CNC-machined accent dial…</span>
+          </div>
+          <span class="stage-status">Waiting</span>
+        </div>
+
+        <div class="build-stage" data-stage="5">
+          <div class="stage-icon-wrap">
+            <svg class="switch-loader-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="11" y1="26" x2="11" y2="30" stroke="#a37e36" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="21" y1="26" x2="21" y2="30" stroke="#a37e36" stroke-width="1.5" stroke-linecap="round"/>
+              <rect x="5" y="18" width="22" height="8" rx="2" fill="#201e1d" stroke="rgba(255,255,255,0.12)" stroke-width="0.8"/>
+              <path d="M7 18 L9.5 12 L22.5 12 L25 18 Z" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.16)" stroke-width="0.8"/>
+              <path class="loader-spring" d="M16 13 L14 15 L18 17 L14 19 L16 21" fill="none" stroke="#c9a96e" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle class="loader-spark" cx="16" cy="18" r="3" fill="#ffffff"/>
+              <g class="loader-stem">
+                <rect x="13" y="6" width="6" height="8" rx="1" fill="#c9a96e"/>
+                <rect x="5" y="3" width="22" height="6" rx="2" fill="#353330" stroke="rgba(255,255,255,0.22)" stroke-width="0.8"/>
+                <line x1="8" y1="5" x2="24" y2="5" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-linecap="round"/>
+              </g>
+            </svg>
+            <div class="stage-check">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
+            </div>
+          </div>
+          <div class="stage-text">
+            <span class="stage-label">Acoustic &amp; Actuation QA</span>
+            <span class="stage-desc">Decibel tuning and sub-millimeter travel verification by master artisans…</span>
+          </div>
+          <span class="stage-status">Waiting</span>
+        </div>
+
+        <div class="build-stage" data-stage="6">
+          <div class="stage-icon-wrap">
+            <svg class="switch-loader-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="11" y1="26" x2="11" y2="30" stroke="#a37e36" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="21" y1="26" x2="21" y2="30" stroke="#a37e36" stroke-width="1.5" stroke-linecap="round"/>
+              <rect x="5" y="18" width="22" height="8" rx="2" fill="#201e1d" stroke="rgba(255,255,255,0.12)" stroke-width="0.8"/>
+              <path d="M7 18 L9.5 12 L22.5 12 L25 18 Z" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.16)" stroke-width="0.8"/>
+              <path class="loader-spring" d="M16 13 L14 15 L18 17 L14 19 L16 21" fill="none" stroke="#c9a96e" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle class="loader-spark" cx="16" cy="18" r="3" fill="#ffffff"/>
+              <g class="loader-stem">
+                <rect x="13" y="6" width="6" height="8" rx="1" fill="#c9a96e"/>
+                <rect x="5" y="3" width="22" height="6" rx="2" fill="#353330" stroke="rgba(255,255,255,0.22)" stroke-width="0.8"/>
+                <line x1="8" y1="5" x2="24" y2="5" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-linecap="round"/>
+              </g>
+            </svg>
+            <div class="stage-check">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
+            </div>
+          </div>
+          <div class="stage-text">
+            <span class="stage-label">Archival White-Glove Packaging</span>
+            <span class="stage-desc">Sealing in bespoke silver-embossed archival box with authenticity certificate…</span>
+          </div>
+          <span class="stage-status">Waiting</span>
+        </div>
+      </div>
+
+      <!-- Completion overlay -->
+      <div class="build-complete" id="build-complete">
+        <h2 class="complete-title">Your GoodKnocks<br>Is Ready For Your Desk</h2>
+        <p class="complete-subtitle">The blank page awaits. So does your first keystroke.</p>
+        <button class="cta-button" id="cta-restart">
+          <span>Configure Another</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== PILL NAV ======================== -->
+  <nav class="pill-nav" aria-label="Main navigation">
+    <div class="pill-nav-inner">
+      <button class="pill-nav-item active" data-nav="hero" aria-label="Home">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/>
+          <path d="M9 21V12h6v9"/>
+        </svg>
+        <span>Home</span>
+      </button>
+      <button class="pill-nav-item" data-nav="story" aria-label="Philosophy">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/>
+          <path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/>
+        </svg>
+        <span>Philosophy</span>
+      </button>
+      <button class="pill-nav-item" data-nav="step-body" aria-label="Craft Studio">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="4" width="20" height="16" rx="3"/>
+          <path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M8 16h8"/>
+        </svg>
+        <span>Craft</span>
+      </button>
+      <div class="pill-nav-indicator"></div>
+    </div>
+  </nav>
+
+  <script src="app.js"></script>
+</body>
+</html>
