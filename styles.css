@@ -1151,8 +1151,8 @@ img {
   height: 100%;
   object-fit: cover;
   opacity: 0;
-  /* Clean Black and White + 2px Gaussian blur + light tone */
-  filter: grayscale(1) contrast(1.08) brightness(0.85) blur(2px);
+  /* Clean Black and White + 1.5px Gaussian blur + luminous tone */
+  filter: grayscale(1) contrast(1.08) brightness(0.92) blur(1.5px);
   transform: scale(1.04);
   transition:
     opacity 1.2s var(--ease-fade),
@@ -1166,13 +1166,13 @@ img {
   transform: scale(1);
 }
 
-/* Clean uniform scrim over video */
+/* Translucent scrim allowing ambient manufacturing motion to show through */
 .build-video-scrim {
   position: absolute;
   inset: 0;
-  background: rgba(248, 246, 240, 0.65);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: rgba(248, 246, 240, 0.42);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   z-index: 1;
   pointer-events: none;
 }
@@ -1190,7 +1190,7 @@ img {
   pointer-events: none;
 }
 
-/* Build Checklist & Solid Clean Card */
+/* Build Checklist Glassmorphic Translucent Card */
 .build-content {
   position: relative;
   z-index: 3;
@@ -1200,10 +1200,12 @@ img {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(24px) saturate(1.25);
+  -webkit-backdrop-filter: blur(24px) saturate(1.25);
+  border: 1px solid rgba(255, 255, 255, 0.7);
   border-radius: 24px;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.9);
   box-sizing: border-box;
 }
 
@@ -1266,10 +1268,12 @@ img {
 }
 
 .build-stage.active {
-  background: rgba(246, 243, 236, 0.95);
-  border: none;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.75);
   opacity: 1;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
 }
 
 .build-stage.complete {
