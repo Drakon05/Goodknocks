@@ -186,7 +186,7 @@ img {
 .hero-logo {
   width: 155px;
   height: auto;
-  filter: brightness(0);
+  filter: invert(1) brightness(1);
   opacity: 0.95;
   margin-bottom: 4px;
   transition: opacity 0.5s ease;
@@ -198,8 +198,8 @@ img {
   font-weight: 300;
   line-height: 1.15;
   letter-spacing: -0.02em;
-  color: var(--text-primary);
-  text-shadow: 0 1px 20px rgba(255, 255, 255, 0.9), 0 0 2px rgba(255, 255, 255, 0.8);
+  color: #ffffff;
+  text-shadow: none;
   min-height: 2.3em;
   display: inline-block;
   text-align: center;
@@ -213,11 +213,11 @@ img {
   display: inline-block;
   width: 3px;
   height: 0.82em;
-  background-color: var(--accent);
+  background-color: #ffffff;
   vertical-align: -0.04em;
   margin-left: 6px;
   border-radius: 2px;
-  box-shadow: 0 0 10px rgba(170, 133, 75, 0.5);
+  box-shadow: none;
   animation: cursor-pulse 0.9s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
@@ -237,9 +237,10 @@ img {
   font-family: var(--font-body);
   font-size: clamp(0.9rem, 1.4vw, 1.05rem);
   font-weight: 300;
-  color: var(--text-secondary);
+  color: rgba(255, 255, 255, 0.88);
   line-height: 1.7;
   max-width: 520px;
+  text-shadow: none;
 }
 
 /* ── Smooth CTA Button ────────────────────────────────────────────────── */
@@ -248,8 +249,8 @@ img {
   align-items: center;
   gap: 12px;
   padding: 16px 36px;
-  background: var(--text-primary);
-  color: #ffffff;
+  background: #ffffff;
+  color: #181716;
   font-family: var(--font-body);
   font-size: 0.9rem;
   font-weight: 500;
@@ -260,14 +261,14 @@ img {
     transform 0.5s var(--ease-smooth),
     box-shadow 0.5s var(--ease-smooth),
     background 0.3s ease;
-  box-shadow: 0 4px 20px rgba(24, 23, 22, 0.18);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
 }
 
 .cta-button:hover {
   transform: translateY(-2px);
-  background: var(--accent);
-  color: #ffffff;
-  box-shadow: 0 8px 30px rgba(170, 133, 75, 0.35);
+  background: #f4f0e6;
+  color: #181716;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
 }
 
 .cta-button:active {
