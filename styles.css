@@ -1611,10 +1611,33 @@ img {
 
 /* ── Responsive ───────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
+  /* Hide preview info pill dock on mobile to eliminate overload */
+  .preview-label {
+    display: none !important;
+  }
+
+  /* Hide switch telemetry metrics bar and callout text lines on mobile */
+  .switch-specs-bar {
+    display: none !important;
+  }
+
+  .switch-callout-lines {
+    display: none !important;
+  }
+
+  .mobile-hide-metric {
+    display: none !important;
+  }
+
+  /* Hide surface treatment options on mobile (locks to clean satin finish) */
+  .finish-group {
+    display: none !important;
+  }
+
   .config-body {
     flex-direction: column;
-    padding: 0 20px 20px;
-    gap: 24px;
+    padding: 0 16px 10px;
+    gap: 12px;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
   }
@@ -1624,20 +1647,21 @@ img {
     flex: none;
     width: 100%;
     padding: 0;
-    min-height: 180px;
+    min-height: auto;
   }
 
   .keyboard-svg {
-    max-width: 95%;
+    max-width: 88%;
+    max-height: 180px;
   }
 
   .switch-diagram-wrap {
-    max-width: 85%;
+    max-width: 220px;
+    margin: 0 auto;
   }
 
-  .switch-specs-bar {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
+  .switch-svg {
+    max-height: 180px;
   }
 
   .options-panel {
@@ -1645,7 +1669,12 @@ img {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
+  }
+
+  .options-label {
+    font-size: 0.64rem;
+    margin-bottom: 6px;
   }
 
   .options-row {
@@ -1654,26 +1683,39 @@ img {
   }
 
   .option-card {
-    padding: 14px 6px;
+    padding: 12px 6px;
     gap: 8px;
-    min-height: 84px;
-    border-radius: 10px;
+    min-height: 76px;
+    border-radius: 12px;
   }
 
   .color-swatch {
-    width: 28px;
-    height: 28px;
+    width: 26px;
+    height: 26px;
+  }
+
+  .switch-icon {
+    width: 26px;
+    height: 26px;
   }
 
   .option-name {
     font-size: 0.74rem;
+    line-height: 1.2;
+  }
+
+  .selected-option-desc {
+    font-size: 0.76rem;
+    margin-top: 6px;
+    min-height: auto;
+    line-height: 1.4;
   }
 
   .config-footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 16px 20px 90px; /* Safely clears pill nav on mobile */
+    padding: 8px 20px 84px; /* Safely clears pill nav on mobile */
   }
 
   .btn-back,
@@ -1734,19 +1776,23 @@ img {
   }
 
   .config-header {
-    padding: 20px 20px 8px;
+    padding: 14px 16px 4px;
   }
 
   .step-label {
-    font-size: 0.68rem;
+    font-size: 0.64rem;
+    letter-spacing: 0.2em;
   }
 
   .step-title {
-    font-size: 1.7rem;
+    font-size: 1.5rem;
+    margin-top: 2px;
   }
 
   .step-subtitle {
-    font-size: 0.82rem;
+    font-size: 0.78rem;
+    margin-top: 2px;
+    line-height: 1.4;
   }
 
   .hero-logo {
