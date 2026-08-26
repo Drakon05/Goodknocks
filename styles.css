@@ -717,12 +717,14 @@ img {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   text-align: center;
-  gap: 10px;
-  padding: 16px 10px;
+  gap: 12px;
+  padding: 20px 12px;
+  min-height: 108px;
   background: var(--bg-card);
   border: 1px solid rgba(0, 0, 0, 0.05);
-  border-radius: 12px;
+  border-radius: 14px;
   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.03);
   transition:
     transform 0.4s var(--ease-smooth),
@@ -731,6 +733,7 @@ img {
   position: relative;
   overflow: hidden;
   cursor: pointer;
+  box-sizing: border-box;
 }
 
 .option-card:hover {
@@ -792,18 +795,10 @@ img {
 }
 
 .option-name {
-  font-size: 0.82rem;
+  font-size: 0.85rem;
   font-weight: 500;
   color: var(--text-primary);
   line-height: 1.25;
-  text-align: center;
-}
-
-.option-desc {
-  font-size: 0.7rem;
-  color: var(--text-secondary);
-  font-weight: 300;
-  line-height: 1.35;
   text-align: center;
 }
 
@@ -846,15 +841,16 @@ img {
   z-index: 1;
 }
 
-/* ── Selected Option Description Text ────────────────────────────────── */
+/* ── Selected Option Description Text (Clean Minimal Line Below Cards) ── */
 .selected-option-desc {
-  font-size: 0.82rem;
+  font-size: 0.88rem;
   font-weight: 300;
-  line-height: 1.55;
+  line-height: 1.6;
   color: var(--text-secondary);
   text-align: center;
-  margin-top: 10px;
-  padding: 0 12px;
+  margin-top: 14px;
+  padding: 0 10px;
+  min-height: 1.6em;
   transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
@@ -1642,13 +1638,10 @@ img {
   }
 
   .option-card {
-    padding: 12px 6px;
-    gap: 6px;
+    padding: 14px 6px;
+    gap: 8px;
+    min-height: 84px;
     border-radius: 10px;
-  }
-
-  .option-card .option-desc {
-    display: none; /* Keep color/variant cards sleek in row layout on mobile */
   }
 
   .color-swatch {

@@ -84,6 +84,12 @@
     silver: 'Mirror-bright silver gelatin luster and timeless contrast',
   };
 
+  const switchDescriptions = {
+    linear: 'Frictionless POM glide rails with dry Krytox film coating',
+    tactile: 'Articulate tactile bump cam with progressive two-stage return',
+    clicky: 'Integrated stainless clickbar for vintage mechanical typewriter cadence',
+  };
+
   /* ── DOM References ───────────────────────────────────────────────── */
   const sections = document.querySelectorAll('.section');
   const pillNavItems = document.querySelectorAll('.pill-nav-item');
@@ -307,6 +313,15 @@
       setTimeout(() => bodyDesc.classList.remove('updating'), 120);
     }
 
+    // Step 2: Switch Architecture Description
+    const switchDesc = document.getElementById('switch-selected-desc');
+    if (switchDesc) {
+      const switchKey = state.config.switchType;
+      switchDesc.classList.add('updating');
+      switchDesc.textContent = switchDescriptions[switchKey];
+      setTimeout(() => switchDesc.classList.remove('updating'), 120);
+    }
+
     // Step 3: Signature Accent Description
     const accentDesc = document.getElementById('accent-selected-desc');
     if (accentDesc) {
@@ -319,6 +334,7 @@
 
   /* ── Switch Internals Preview Updates (Step 2) ────────────────────── */
   function updateSwitchInternalPreview() {
+    updateSelectedOptionDescriptions();
     const spec = switchSpecs[state.config.switchType];
     const container = document.getElementById('preview-switch-internals');
     if (!container) return;
