@@ -162,16 +162,13 @@ img {
   height: 100%;
   object-fit: cover;
   object-position: center 32%;
-  filter: contrast(1.04) brightness(0.92);
+  filter: contrast(1.02) brightness(0.96);
   transform: scale(1.02);
   transition: transform 3s var(--ease-smooth);
 }
 
 .hero-vignette {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at center, rgba(248, 246, 240, 0.25) 15%, rgba(248, 246, 240, 0.88) 85%);
-  pointer-events: none;
+  display: none; /* Silhouetting removed completely for full photo visibility */
 }
 
 .hero-content {
@@ -189,7 +186,7 @@ img {
 .hero-logo {
   width: 155px;
   height: auto;
-  filter: brightness(0.12);
+  filter: brightness(0);
   opacity: 0.95;
   margin-bottom: 4px;
   transition: opacity 0.5s ease;
@@ -202,7 +199,7 @@ img {
   line-height: 1.15;
   letter-spacing: -0.02em;
   color: var(--text-primary);
-  text-shadow: 0 2px 24px rgba(255, 255, 255, 0.9);
+  text-shadow: 0 1px 20px rgba(255, 255, 255, 0.9), 0 0 2px rgba(255, 255, 255, 0.8);
   min-height: 2.3em;
   display: inline-block;
   text-align: center;
@@ -1137,11 +1134,13 @@ img {
   transform: scale(1);
 }
 
-/* Light Vignette Scrim over video */
+/* Clean uniform scrim over video */
 .build-video-scrim {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at center, rgba(248, 246, 240, 0.35) 20%, rgba(248, 246, 240, 0.9) 90%);
+  background: rgba(248, 246, 240, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   z-index: 1;
   pointer-events: none;
 }
@@ -1159,22 +1158,21 @@ img {
   pointer-events: none;
 }
 
-/* Build Checklist & Glassmorphic Content Card */
+/* Build Checklist & Solid Clean Card */
 .build-content {
   position: relative;
   z-index: 3;
   width: 100%;
-  max-width: 680px;
+  max-width: 700px;
   padding: 36px 32px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(28px) saturate(1.2);
-  -webkit-backdrop-filter: blur(28px) saturate(1.2);
+  background: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 24px;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
 }
 
 .build-title {
@@ -1219,12 +1217,15 @@ img {
 }
 
 .build-stage {
-  display: flex;
+  display: grid;
+  grid-template-columns: 32px 1fr auto;
   align-items: center;
-  gap: 16px;
-  padding: 11px 16px;
+  gap: 14px;
+  padding: 10px 16px;
   border-radius: 10px;
   background: transparent;
+  width: 100%;
+  box-sizing: border-box;
   transition:
     background 0.4s ease,
     transform 0.5s var(--ease-smooth),
@@ -1359,22 +1360,29 @@ img {
 }
 
 .stage-text {
-  flex: 1;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 2px;
+  overflow: hidden;
 }
 
 .stage-label {
   font-size: 0.88rem;
   font-weight: 500;
   color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .stage-desc {
   font-size: 0.74rem;
   color: var(--text-muted);
   font-weight: 300;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .build-stage.active .stage-desc {
@@ -1386,6 +1394,9 @@ img {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+  text-align: right;
   transition: color 0.3s ease;
 }
 
@@ -1795,6 +1806,8 @@ img {
   }
 
   .build-stage {
+    display: grid;
+    grid-template-columns: 28px 1fr auto;
     padding: 10px 12px;
     gap: 12px;
     min-height: 58px;
