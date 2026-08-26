@@ -837,41 +837,43 @@ img {
 }
 
 /* ── Config Footer ────────────────────────────────────────────────────── */
-.config-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 1240px;
-  padding: 8px 44px 18px;
-  flex-shrink: 0;
-  box-sizing: border-box;
-}
-
+/* ── Configurator Navigation Chevrons (Desktop Fixed Edge Positioning) ─── */
 .btn-back,
 .btn-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
   display: inline-flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 4px;
-  padding: 6px 16px;
+  gap: 6px;
+  padding: 14px 16px;
   background: transparent;
   border: none;
   outline: none;
   box-shadow: none;
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.35);
   cursor: pointer;
   border-radius: 0;
+  z-index: 30;
   transition:
     color 0.35s ease,
     transform 0.4s var(--ease-smooth),
     opacity 0.35s ease;
 }
 
+.btn-back {
+  left: clamp(20px, 3.5vw, 64px);
+}
+
+.btn-next {
+  right: clamp(20px, 3.5vw, 64px);
+}
+
 .nav-chevron {
-  width: 40px;
-  height: 28px;
+  width: 44px;
+  height: 32px;
   stroke: currentColor;
   transition:
     transform 0.4s var(--ease-smooth),
@@ -882,16 +884,16 @@ img {
 .btn-text {
   font-size: 0.68rem;
   font-weight: 400;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.35);
   transition: color 0.35s ease;
 }
 
 .btn-back:hover {
   background: transparent;
   color: var(--cream);
-  transform: translateX(-5px);
+  transform: translateY(-50%) translateX(-6px);
 }
 
 .btn-back:hover .btn-text {
@@ -899,13 +901,13 @@ img {
 }
 
 .btn-back:hover .nav-chevron {
-  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.35));
+  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.4));
 }
 
 .btn-next:hover {
   background: transparent;
   color: var(--cream);
-  transform: translateX(5px);
+  transform: translateY(-50%) translateX(6px);
 }
 
 .btn-next:hover .btn-text {
@@ -913,7 +915,7 @@ img {
 }
 
 .btn-next:hover .nav-chevron {
-  filter: drop-shadow(0 0 10px rgba(201, 169, 110, 0.45));
+  filter: drop-shadow(0 0 12px rgba(201, 169, 110, 0.5));
 }
 
 .btn-confirm {
@@ -927,6 +929,7 @@ img {
 .btn-confirm:hover {
   background: transparent;
   color: var(--accent-light);
+  transform: translateY(-50%) translateX(6px);
 }
 
 .btn-confirm:hover .btn-text {
@@ -934,12 +937,27 @@ img {
 }
 
 .btn-confirm:hover .nav-chevron {
-  filter: drop-shadow(0 0 12px rgba(201, 169, 110, 0.6));
+  filter: drop-shadow(0 0 14px rgba(201, 169, 110, 0.7));
 }
 
-.btn-next:active,
+.btn-next:active {
+  transform: translateY(-50%) scale(0.94);
+}
+
 .btn-back:active {
-  transform: scale(0.94);
+  transform: translateY(-50%) scale(0.94);
+}
+
+/* ── Config Footer (Desktop: centered dots) ───────────────────────────── */
+.config-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 1240px;
+  padding: 8px 44px 18px;
+  flex-shrink: 0;
+  box-sizing: border-box;
 }
 
 .step-dots {
@@ -1601,15 +1619,30 @@ img {
   }
 
   .config-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding: 16px 20px 90px; /* Safely clears pill nav on mobile */
   }
 
   .btn-back,
   .btn-next {
+    position: static;
+    transform: none;
+    left: auto;
+    right: auto;
+    top: auto;
     flex-direction: row;
     padding: 8px 18px;
     border-radius: 40px;
     gap: 6px;
+    z-index: 10;
+  }
+
+  .btn-back:hover,
+  .btn-next:hover,
+  .btn-confirm:hover {
+    transform: none;
   }
 
   .btn-back {
