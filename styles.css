@@ -618,6 +618,14 @@ img {
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
+.switch-top-housing-group {
+  pointer-events: none;
+}
+
+.switch-polycarb-cover {
+  transition: stroke 0.4s ease, fill 0.4s ease;
+}
+
 /* Switch Telemetry & Engineering Specs */
 .switch-specs-bar {
   display: grid;
