@@ -162,13 +162,17 @@ img {
   height: 100%;
   object-fit: cover;
   object-position: center 32%;
-  filter: contrast(1.02) brightness(0.96);
-  transform: scale(1.02);
+  filter: contrast(1.04) brightness(0.92) blur(2.5px);
+  transform: scale(1.05);
   transition: transform 3s var(--ease-smooth);
 }
 
 .hero-vignette {
-  display: none; /* Silhouetting removed completely for full photo visibility */
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.22) 0%, rgba(0, 0, 0, 0.38) 100%);
+  pointer-events: none;
+  z-index: 1;
 }
 
 .hero-content {
