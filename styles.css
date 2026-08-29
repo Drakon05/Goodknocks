@@ -235,10 +235,11 @@ img {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   flex-shrink: 0;
-  padding: 60px 24px 100px;
+  padding: 56px 24px calc(var(--nav-height) + 28px);
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 .founder-bg {
@@ -261,23 +262,22 @@ img {
 .founder-vignette {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.72) 100%),
-              linear-gradient(180deg, rgba(0, 0, 0, 0.45) 0%, transparent 20%, transparent 75%, rgba(0, 0, 0, 0.75) 100%);
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.68) 100%),
+              linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, transparent 25%, transparent 70%, rgba(0, 0, 0, 0.78) 100%);
   pointer-events: none;
   z-index: 1;
 }
 
-.founder-content {
+.founder-top {
   position: relative;
   z-index: 2;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 18px;
-  padding: 0 24px;
-  max-width: 760px;
-  color: #ffffff;
+  gap: 8px;
+  padding: 0 20px;
+  max-width: 800px;
 }
 
 .founder-eyebrow {
@@ -300,14 +300,21 @@ img {
   text-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
 }
 
+.founder-bottom {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 680px;
+  padding: 0 24px;
+}
+
 .founder-subtitle {
   font-family: var(--font-body);
-  font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+  font-size: clamp(1.02rem, 1.4vw, 1.22rem);
   font-weight: 300;
-  color: rgba(255, 255, 255, 0.92);
+  color: rgba(255, 255, 255, 0.94);
   line-height: 1.72;
-  max-width: 620px;
-  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.7);
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.8);
 }
 
 .hero-vignette {
