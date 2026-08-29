@@ -2089,14 +2089,65 @@ img {
   }
 
   .founder-section {
-    padding: 40px 20px 100px;
+    padding: 44px 20px calc(var(--nav-height) + 24px);
+  }
+
+  .founder-bg-img {
+    object-position: 42% 20%;
+  }
+
+  .founder-top {
+    gap: 6px;
+    padding: 0 10px;
+  }
+
+  .founder-eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+  }
+
+  .founder-title {
+    font-size: clamp(2.4rem, 8.5vw, 3.2rem);
+  }
+
+  .founder-bottom {
+    padding: 0 16px;
+    max-width: 100%;
+  }
+
+  .founder-subtitle {
+    font-size: clamp(0.95rem, 3.8vw, 1.1rem);
+    line-height: 1.58;
   }
 }
 
 @media (max-width: 480px) {
-  .founder-title {
-    font-size: 2.4rem;
+  .hero-screen {
+    padding: 30px 16px 70px;
   }
+
+  .hero-scroll-cue {
+    bottom: 16px;
+    padding: 6px 14px;
+  }
+
+  .founder-section {
+    padding: 36px 16px calc(var(--nav-height) + 16px);
+  }
+
+  .founder-bg-img {
+    object-position: 40% 18%;
+  }
+
+  .founder-title {
+    font-size: clamp(2.1rem, 9.5vw, 2.6rem);
+  }
+
+  .founder-subtitle {
+    font-size: 0.94rem;
+    line-height: 1.52;
+  }
+
   .pill-nav-item span {
     font-size: 0.55rem;
     letter-spacing: 0.02em;
@@ -2195,6 +2246,115 @@ img {
 
   .stage-desc {
     font-size: 0.66rem;
+  }
+}
+
+/* ── Large Desktop & Ultrawide Screens (1440px+) ───────────────────────── */
+@media (min-width: 1440px) {
+  .hero-content {
+    max-width: 960px;
+    gap: 30px;
+  }
+
+  .hero-title {
+    font-size: clamp(3rem, 5.2vw, 5.2rem);
+  }
+
+  .hero-subtitle {
+    max-width: 640px;
+    font-size: 1.16rem;
+    line-height: 1.8;
+  }
+
+  .founder-top {
+    max-width: 960px;
+    gap: 12px;
+  }
+
+  .founder-title {
+    font-size: clamp(3.2rem, 5.4vw, 5.4rem);
+  }
+
+  .founder-subtitle {
+    max-width: 780px;
+    font-size: 1.32rem;
+    line-height: 1.8;
+  }
+
+  .founder-section {
+    padding: 70px 48px calc(var(--nav-height) + 36px);
+  }
+
+  .keyboard-preview-container {
+    max-width: 860px;
+  }
+}
+
+@media (min-width: 2000px) {
+  .hero-content {
+    max-width: 1150px;
+    gap: 36px;
+  }
+
+  .hero-title {
+    font-size: 5.8rem;
+  }
+
+  .hero-subtitle {
+    max-width: 760px;
+    font-size: 1.35rem;
+  }
+
+  .founder-title {
+    font-size: 6rem;
+  }
+
+  .founder-subtitle {
+    max-width: 920px;
+    font-size: 1.55rem;
+  }
+}
+
+/* ── Short Viewport Height (Laptops & Landscape Displays) ─────────────── */
+@media (max-height: 700px) {
+  .hero-screen {
+    padding: 24px 20px 60px;
+  }
+
+  .hero-content {
+    gap: 14px;
+  }
+
+  .hero-logo {
+    width: 120px;
+  }
+
+  .hero-title {
+    font-size: clamp(2rem, 5.5vh, 3.2rem);
+    min-height: 2em;
+  }
+
+  .hero-subtitle {
+    font-size: 0.92rem;
+    line-height: 1.45;
+  }
+
+  .hero-scroll-cue {
+    bottom: 12px;
+    padding: 5px 12px;
+  }
+
+  .founder-section {
+    padding: 28px 20px calc(var(--nav-height) + 14px);
+  }
+
+  .founder-title {
+    font-size: clamp(2.2rem, 6vh, 3.2rem);
+  }
+
+  .founder-subtitle {
+    font-size: 0.94rem;
+    line-height: 1.45;
   }
 }
 
