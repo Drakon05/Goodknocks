@@ -147,7 +147,23 @@ img {
 
 /* ── Hero Section ─────────────────────────────────────────────────────── */
 #hero {
+  justify-content: flex-start;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
   padding-bottom: 0;
+}
+
+.hero-screen {
+  position: relative;
+  width: 100%;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 40px 24px 80px;
 }
 
 .hero-bg {
@@ -165,6 +181,256 @@ img {
   filter: contrast(1.04) brightness(0.92) blur(2.5px);
   transform: scale(1.05);
   transition: transform 3s var(--ease-smooth);
+}
+
+.hero-scroll-cue {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255, 255, 255, 0.75);
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  padding: 8px 18px;
+  border-radius: 30px;
+  transition: all 0.35s var(--ease-smooth);
+}
+
+.hero-scroll-cue:hover {
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.45);
+  border-color: rgba(255, 255, 255, 0.32);
+  transform: translateX(-50%) translateY(2px);
+}
+
+.scroll-cue-text {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.scroll-cue-icon {
+  animation: cue-bounce 2s infinite ease-in-out;
+}
+
+@keyframes cue-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+
+/* ── Founder Section (Within Hero Scroll) ──────────────────────────────── */
+.founder-section {
+  width: 100%;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  padding: 100px 36px 150px;
+  position: relative;
+  z-index: 2;
+  border-top: 1px solid rgba(129, 97, 62, 0.18);
+}
+
+.founder-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.founder-header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+.founder-eyebrow {
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+  display: inline-block;
+}
+
+.founder-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.3rem, 4.8vw, 3.6rem);
+  font-weight: 300;
+  line-height: 1.15;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+}
+
+.founder-subtitle {
+  font-size: clamp(0.98rem, 1.3vw, 1.1rem);
+  color: var(--text-secondary);
+  max-width: 680px;
+  margin: 0 auto;
+  line-height: 1.68;
+  font-weight: 300;
+}
+
+.founder-grid {
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: 52px;
+  align-items: center;
+}
+
+.founder-image-frame {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(129, 97, 62, 0.22);
+  background: #141312;
+  aspect-ratio: 16 / 10;
+}
+
+.founder-portrait {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  display: block;
+  filter: contrast(1.05) brightness(0.96);
+  transition: transform 0.8s var(--ease-smooth);
+}
+
+.founder-image-frame:hover .founder-portrait {
+  transform: scale(1.03);
+}
+
+.founder-portrait-vignette {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 45%, rgba(0, 0, 0, 0.72) 100%);
+  pointer-events: none;
+}
+
+.founder-caption-tag {
+  position: absolute;
+  bottom: 18px;
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  color: #ffffff;
+  z-index: 2;
+}
+
+.founder-tag-name {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+}
+
+.founder-tag-role {
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent-light);
+}
+
+.founder-story-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.founder-quote-box {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(129, 97, 62, 0.2);
+  border-radius: 14px;
+  padding: 24px 26px;
+  margin-bottom: 24px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.03);
+}
+
+.founder-quote-mark {
+  color: var(--accent);
+  opacity: 0.65;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.founder-quote-text {
+  font-family: var(--font-display);
+  font-size: 1.24rem;
+  font-style: italic;
+  color: var(--text-primary);
+  line-height: 1.48;
+}
+
+.founder-narrative {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 28px;
+  font-size: 0.96rem;
+  line-height: 1.76;
+  color: var(--text-secondary);
+  font-weight: 300;
+}
+
+.founder-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  border-top: 1px solid rgba(129, 97, 62, 0.18);
+  padding-top: 22px;
+  margin-bottom: 28px;
+}
+
+.founder-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.metric-num {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.metric-unit {
+  font-size: 1rem;
+  margin-left: 2px;
+  color: var(--text-muted);
+}
+
+.metric-label {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  line-height: 1.35;
+}
+
+.founder-actions {
+  display: flex;
+  align-items: center;
+}
+
+.founder-cta {
+  background: var(--text-primary);
+  color: #ffffff;
+}
+
+.founder-cta:hover {
+  background: var(--accent-dark);
+  color: #ffffff;
 }
 
 .hero-vignette {
@@ -1937,9 +2203,47 @@ img {
   .congrats-summary {
     gap: 8px;
   }
+
+  .founder-section {
+    padding: 70px 20px 140px;
+  }
+
+  .founder-header {
+    margin-bottom: 36px;
+  }
+
+  .founder-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .founder-image-frame {
+    aspect-ratio: 16 / 11;
+    max-height: 380px;
+  }
+
+  .founder-quote-box {
+    padding: 20px 20px;
+  }
+
+  .founder-quote-text {
+    font-size: 1.12rem;
+  }
+
+  .founder-metrics {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
 }
 
 @media (max-width: 480px) {
+  .founder-metrics {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .founder-title {
+    font-size: 1.95rem;
+  }
   .pill-nav-item span {
     font-size: 0.55rem;
     letter-spacing: 0.02em;

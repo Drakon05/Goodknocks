@@ -187,8 +187,15 @@
     navigateTo('hero');
   });
 
-  /* ── Back / Next Buttons ──────────────────────────────────────────── */
-  document.querySelectorAll('.btn-back, .btn-next').forEach((btn) => {
+  document.getElementById('hero-scroll-down')?.addEventListener('click', () => {
+    const founderSec = document.getElementById('hero-founder');
+    if (founderSec) {
+      founderSec.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+
+  /* ── Back / Next / Action Navigation Buttons ─────────────────────── */
+  document.querySelectorAll('.btn-back, .btn-next, [data-goto]').forEach((btn) => {
     btn.addEventListener('click', () => {
       const target = btn.getAttribute('data-goto');
       if (target) navigateTo(target);
