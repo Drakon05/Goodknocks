@@ -13,7 +13,7 @@
       bodyColor: { name: 'Obsidian Noir', hex: '#18181a', key: 'obsidian' },
       finish: 'matte',
       switchType: 'linear',
-      accent: { name: 'Champagne Brass', hex: '#c9a96e', key: 'gold' },
+      accent: { name: 'Champagne Brass', hex: '#81613E', key: 'gold' },
     },
     buildRunning: false,
   };
@@ -38,8 +38,8 @@
       pretravel: '1.2 mm',
       total: '3.2 mm',
       acoustic: 'Muted Whisper',
-      stemColor: '#c9a96e',
-      glow: 'rgba(201, 169, 110, 0.15)',
+      stemColor: '#81613E',
+      glow: 'rgba(129, 97, 62, 0.15)',
       desc: 'Velvet Linear · Silent Glide Architecture',
     },
     tactile: {
@@ -607,9 +607,9 @@
     document.body.appendChild(container);
 
     const colors = [
-      '#c9a96e',
-      '#dfd3bf',
-      '#bda583',
+      '#81613E',
+      '#C4AE94',
+      '#A68460',
       '#eae5dc',
       '#78a883',
       '#b76e79',
