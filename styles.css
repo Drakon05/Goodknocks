@@ -254,8 +254,8 @@ img {
   height: 100%;
   object-fit: cover;
   object-position: center 30%;
-  filter: contrast(1.06) brightness(0.68);
-  transform: scale(1.02);
+  filter: contrast(1.06) brightness(0.68) blur(2px);
+  transform: scale(1.04);
   transition: transform 3s var(--ease-smooth);
 }
 
