@@ -340,7 +340,8 @@ img {
 .hero-logo {
   width: 155px;
   height: auto;
-  opacity: 0.95;
+  filter: brightness(0) invert(1);
+  opacity: 1;
   margin-bottom: 4px;
   transition: opacity 0.5s ease;
 }
