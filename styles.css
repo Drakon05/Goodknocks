@@ -13,9 +13,9 @@
   --text-primary: #181716;
   --text-secondary: #58534b;
   --text-muted: #888174;
-  --accent: #aa854b;
-  --accent-light: #c4a46e;
-  --accent-dark: #7a5a2a;
+  --accent: #4A5D23;
+  --accent-light: #6E8B35;
+  --accent-dark: #323F17;
   --cream: #181716;
   --warm-white: #ffffff;
   --warm-black: #181716;
@@ -23,8 +23,8 @@
 
   /* Keyboard configurator dynamic variables */
   --kb-chassis: #1e1d1c;
-  --kb-accent: #aa854b;
-  --kb-switch-glow: rgba(170, 133, 75, 0.25);
+  --kb-accent: #4A5D23;
+  --kb-switch-glow: rgba(74, 93, 35, 0.25);
 
   /* Typography */
   --font-display: 'Cormorant Garamond', 'Georgia', serif;
@@ -347,7 +347,7 @@ img {
   flex-direction: column;
   gap: 26px;
   text-align: left;
-  border-top: 1px solid rgba(170, 133, 75, 0.22);
+  border-top: 1px solid rgba(74, 93, 35, 0.22);
   padding-top: 36px;
 }
 
@@ -748,8 +748,8 @@ img {
 
 .option-card.selected {
   background: var(--bg-card-hover);
-  border-color: rgba(170, 133, 75, 0.35);
-  box-shadow: 0 8px 28px rgba(170, 133, 75, 0.14), 0 2px 10px rgba(0, 0, 0, 0.04);
+  border-color: rgba(74, 93, 35, 0.35);
+  box-shadow: 0 8px 28px rgba(74, 93, 35, 0.14), 0 2px 10px rgba(0, 0, 0, 0.04);
 }
 
 .color-swatch {
@@ -938,7 +938,7 @@ img {
 }
 
 .btn-next:hover .nav-chevron {
-  filter: drop-shadow(0 0 10px rgba(170, 133, 75, 0.35));
+  filter: drop-shadow(0 0 10px rgba(74, 93, 35, 0.35));
 }
 
 .btn-confirm {
@@ -960,7 +960,7 @@ img {
 }
 
 .btn-confirm:hover .nav-chevron {
-  filter: drop-shadow(0 0 12px rgba(170, 133, 75, 0.5));
+  filter: drop-shadow(0 0 12px rgba(74, 93, 35, 0.5));
 }
 
 .btn-next:active {
@@ -1319,7 +1319,7 @@ img {
 /* Active Stage: Switch is animated in a rhythmic mechanical click loop */
 .build-stage.active .switch-loader-icon {
   opacity: 1;
-  filter: drop-shadow(0 0 6px rgba(170, 133, 75, 0.4));
+  filter: drop-shadow(0 0 6px rgba(74, 93, 35, 0.4));
 }
 
 .build-stage.active .loader-stem {
