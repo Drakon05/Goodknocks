@@ -187,14 +187,6 @@
     navigateTo('hero');
   });
 
-  document.getElementById('hero-scroll-down')?.addEventListener('click', () => {
-    const hero = document.getElementById('hero');
-    if (hero) {
-      const targetScroll = (hero.scrollHeight - hero.clientHeight) * 0.25;
-      hero.scrollTo({ top: targetScroll, behavior: 'smooth' });
-    }
-  });
-
   /* ── Back / Next / Action Navigation Buttons ─────────────────────── */
   document.querySelectorAll('.btn-back, .btn-next, [data-goto]').forEach((btn) => {
     btn.addEventListener('click', () => {
