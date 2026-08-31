@@ -27,8 +27,8 @@
   --kb-switch-glow: rgba(129, 97, 62, 0.25);
 
   /* Typography */
-  --font-display: 'Cormorant Garamond', 'Georgia', serif;
-  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Jura', sans-serif;
+  --font-body: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
   /* Ultra-smooth Luxury Motion (No spring/bounciness) */
   --ease-luxury: cubic-bezier(0.16, 1, 0.3, 1);
