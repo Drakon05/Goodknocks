@@ -607,7 +607,8 @@ img {
   width: 100%;
   max-width: 620px;
   height: auto;
-  filter: drop-shadow(0 20px 44px rgba(0,0,0,0.12));
+  overflow: visible;
+  filter: drop-shadow(0 14px 28px rgba(0,0,0,0.08));
   transition: transform 0.6s var(--ease-smooth);
 }
 
