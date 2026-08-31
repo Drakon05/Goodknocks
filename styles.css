@@ -169,7 +169,7 @@ img {
 .hero-scroll-track {
   position: relative;
   width: 100%;
-  height: 420vh;
+  height: 320vh;
   pointer-events: none;
 }
 
@@ -196,25 +196,6 @@ img {
   z-index: 1;
   filter: contrast(1.05) brightness(0.92) blur(0.5px);
   will-change: transform;
-}
-
-.hero-founder-backdrop {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  opacity: 0;
-  pointer-events: none;
-  overflow: hidden;
-  will-change: opacity;
-}
-
-.hero-founder-backdrop .founder-bg-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 48%;
-  filter: contrast(1.06) brightness(0.68) blur(2px);
-  transform: scale(1.04);
 }
 
 .hero-vignette {
@@ -329,29 +310,27 @@ img {
   transition: width 0.08s linear;
 }
 
-/* ── Section 2: Founder Layer (Final resting view of the scroll) ───────── */
-.hero-founder-layer {
-  position: absolute;
-  inset: 0;
-  z-index: 5;
+/* ── Section 2: Founder (Regular Vertical Scroll Section, No Blur) ────── */
+.founder-section {
+  position: relative;
+  width: 100%;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  flex-shrink: 0;
   padding: 56px 24px calc(var(--nav-height) + 28px);
   overflow: hidden;
   box-sizing: border-box;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.35s ease, transform 0.35s ease;
-  transform: translateY(16px);
+  background: #0e0d0c;
+  z-index: 10;
 }
 
-.hero-founder-layer.active {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(0);
+.founder-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
 }
 
 .founder-bg-img {

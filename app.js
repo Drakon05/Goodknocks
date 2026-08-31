@@ -680,13 +680,12 @@
   function initExplodedScrollVideo() {
     const canvas = document.getElementById('explode-canvas');
     const hero = document.getElementById('hero');
+    const explodeTrack = document.getElementById('hero-explode-track');
     const heroContentLayer = document.getElementById('hero-content-layer');
-    const founderBackdrop = document.getElementById('hero-founder-backdrop');
-    const founderLayer = document.getElementById('hero-founder-layer');
     const cards = document.querySelectorAll('.explode-card');
     const progressFill = document.getElementById('explode-progress-fill');
 
-    if (!canvas || !hero) return;
+    if (!canvas || !hero || !explodeTrack) return;
 
     const ctx = canvas.getContext('2d', { alpha: false });
 
@@ -743,14 +742,15 @@
       isExplodeTicking = false;
       if (state.currentSection !== 'hero') return;
 
-      const totalScrollable = hero.scrollHeight - hero.clientHeight;
-      if (totalScrollable <= 0) return;
+      const trackScrollable = explodeTrack.offsetHeight - window.innerHeight;
+      if (trackScrollable <= 0) return;
 
-      // Overall scroll progress: 0.0 (Section 1: Hero) -> 1.0 (Section 2: Founder)
-      const progress = Math.max(0, Math.min(1, hero.scrollTop / totalScrollable));
+      // Scroll progress through the disassembly track (0.0 to 1.0)
+      const currentScroll = hero.scrollTop;
+      const progress = Math.max(0, Math.min(1, currentScroll / trackScrollable));
 
       // Calculate target frame across the sequence (0 to 152)
-      const animProgress = Math.max(0, Math.min(1, (progress - 0.04) / 0.80));
+      const animProgress = Math.max(0, Math.min(1, (progress - 0.04) / 0.92));
       const targetFrame = Math.min(
         TOTAL_EXPLODE_FRAMES - 1,
         Math.floor(animProgress * TOTAL_EXPLODE_FRAMES)
@@ -766,8 +766,8 @@
 
       // ── Section 1: Hero Content fade ──
       if (heroContentLayer) {
-        if (progress <= 0.16) {
-          const heroAlpha = Math.max(0, 1 - progress / 0.14);
+        if (progress <= 0.18) {
+          const heroAlpha = Math.max(0, 1 - progress / 0.15);
           heroContentLayer.style.opacity = heroAlpha;
           heroContentLayer.style.transform = `translateY(-${progress * 80}px)`;
           heroContentLayer.classList.toggle('faded-out', heroAlpha <= 0.05);
@@ -777,26 +777,16 @@
         }
       }
 
-      // ── Disassembly Acoustic Storytelling Callouts (0.18 -> 0.78) ──
+      // ── Disassembly Acoustic Storytelling Callouts (0.20 -> 0.92) ──
       cards.forEach((card) => {
         const cardIndex = parseInt(card.getAttribute('data-card'), 10);
         let isActive = false;
-        if (cardIndex === 0 && progress >= 0.18 && progress <= 0.38) isActive = true;
-        else if (cardIndex === 1 && progress > 0.38 && progress <= 0.58) isActive = true;
-        else if (cardIndex === 2 && progress > 0.58 && progress <= 0.78) isActive = true;
+        if (cardIndex === 0 && progress >= 0.20 && progress <= 0.42) isActive = true;
+        else if (cardIndex === 1 && progress > 0.42 && progress <= 0.68) isActive = true;
+        else if (cardIndex === 2 && progress > 0.68 && progress <= 0.92) isActive = true;
 
         card.classList.toggle('active', isActive);
       });
-
-      // ── Section 2: Founder Backdrop Crossfade & Content (0.80 -> 1.0) ──
-      if (founderBackdrop) {
-        const founderAlpha = Math.max(0, Math.min(1, (progress - 0.80) / 0.14));
-        founderBackdrop.style.opacity = founderAlpha;
-      }
-      if (founderLayer) {
-        const isFounderActive = progress >= 0.82;
-        founderLayer.classList.toggle('active', isFounderActive);
-      }
     }
 
     function onScroll() {

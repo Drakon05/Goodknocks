@@ -25,22 +25,13 @@
   <!-- Film Grain Overlay -->
   <div class="grain-overlay" aria-hidden="true"></div>
 
-  <!-- ============================= HERO (UNIFIED CINEMATIC SCROLL) ============================= -->
+  <!-- ============================= HERO & FOUNDER ============================= -->
   <section id="hero" class="section active" data-section="hero">
-    <div class="hero-scroll-track">
+    <!-- ── TRACK 1: Hero & Exploded Anatomy Sequence ── -->
+    <div class="hero-scroll-track" id="hero-explode-track">
       <div class="hero-sticky-stage">
         <!-- Background Canvas (Preloaded Disassembly Frames 1-153) -->
         <canvas id="explode-canvas" class="hero-stage-canvas"></canvas>
-
-        <!-- Static Section 2 (Founder) Backdrop Crossfade -->
-        <div class="hero-founder-backdrop" id="hero-founder-backdrop">
-          <img
-            src="founder-kaushal.jpg"
-            alt="Kaushal — Founder of GoodKnocks"
-            class="founder-bg-img"
-            loading="eager"
-          >
-        </div>
 
         <!-- Vignette and Grain -->
         <div class="hero-vignette"></div>
@@ -68,7 +59,7 @@
           </button>
         </div>
 
-        <!-- ── DISASSEMBLY ACOUSTIC STORYTELLING CARDS (20% -> 80%) ── -->
+        <!-- ── DISASSEMBLY ACOUSTIC STORYTELLING CARDS (20% -> 90%) ── -->
         <div class="explode-callout-overlay">
           <!-- Layer 1 / Gaskets & Foam -->
           <div class="explode-card" data-card="0">
@@ -97,19 +88,28 @@
             </p>
           </div>
         </div>
+      </div>
+    </div>
 
-        <!-- ── SECTION 2: FOUNDER CONTENT (80% -> 100%) ── -->
-        <div class="hero-founder-layer" id="hero-founder-layer">
-          <div class="founder-top">
-            <span class="founder-eyebrow">Our Founder</span>
-            <h2 class="founder-title">Kaushal</h2>
-          </div>
-          <div class="founder-bottom">
-            <p class="founder-subtitle">
-              Driven by a relentless devotion and a particular eye for the smallest, most minute details in every bespoke instrument we sculpt.
-            </p>
-          </div>
-        </div>
+    <!-- ── SECTION 2: FOUNDER (Regular Vertical Scroll Section, No Blur) ── -->
+    <div class="founder-section" id="hero-founder">
+      <div class="founder-bg">
+        <img
+          src="founder-kaushal.jpg"
+          alt="Kaushal — Founder of GoodKnocks"
+          class="founder-bg-img"
+          loading="lazy"
+        >
+        <div class="founder-vignette"></div>
+      </div>
+      <div class="founder-top">
+        <span class="founder-eyebrow">Our Founder</span>
+        <h2 class="founder-title">Kaushal</h2>
+      </div>
+      <div class="founder-bottom">
+        <p class="founder-subtitle">
+          Driven by a relentless devotion and a particular eye for the smallest, most minute details in every bespoke instrument we sculpt.
+        </p>
       </div>
     </div>
   </section>
