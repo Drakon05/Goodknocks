@@ -821,17 +821,15 @@ img {
 }
 
 .preview-change-indicator {
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   font-weight: 400;
   color: var(--text-secondary);
   letter-spacing: 0.05em;
-  padding: 6px 16px;
-  background: var(--bg-card);
-  border-radius: 20px;
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+  padding: 4px 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
   display: inline-block;
-  backdrop-filter: blur(12px);
   transition: opacity 0.4s ease, transform 0.4s var(--ease-smooth);
 }
 
