@@ -788,13 +788,12 @@
         card.classList.toggle('active', isActive);
       });
 
-      // ── Section 2: Founder Backdrop Crossfade & Content (0.80 -> 1.0) ──
+      // ── Section 2: Founder Backdrop & Content (0.82 -> 1.0) ──
+      const isFounderActive = progress >= 0.82;
       if (founderBackdrop) {
-        const founderAlpha = Math.max(0, Math.min(1, (progress - 0.80) / 0.14));
-        founderBackdrop.style.opacity = founderAlpha;
+        founderBackdrop.style.opacity = isFounderActive ? '1' : '0';
       }
       if (founderLayer) {
-        const isFounderActive = progress >= 0.82;
         founderLayer.classList.toggle('active', isFounderActive);
       }
     }
