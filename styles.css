@@ -253,7 +253,7 @@ img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 30%;
+  object-position: center 48%;
   filter: contrast(1.06) brightness(0.68) blur(2px);
   transform: scale(1.04);
   transition: transform 3s var(--ease-smooth);
@@ -2093,7 +2093,7 @@ img {
   }
 
   .founder-bg-img {
-    object-position: 42% 20%;
+    object-position: center 48%;
   }
 
   .founder-top {
