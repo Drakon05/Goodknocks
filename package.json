@@ -1,0 +1,13 @@
+{
+  "name": "goodknocks",
+  "version": "1.0.0",
+  "description": "GoodKnocks — Heirloom Low-Profile Keyboard Website",
+  "scripts": {
+    "start": "npx serve . -l 8000",
+    "dev": "npx serve . -l 8000",
+    "preview": "npx serve . -l 8000"
+  },
+  "keywords": ["keyboard", "goodknocks", "low-profile"],
+  "author": "Kaushal",
+  "license": "MIT"
+}
