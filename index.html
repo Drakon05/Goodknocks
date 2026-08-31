@@ -54,12 +54,68 @@
         </button>
       </div>
 
-      <button class="hero-scroll-cue" id="hero-scroll-down" aria-label="Scroll down to meet our founder">
-        <span class="scroll-cue-text">Meet Our Founder</span>
+      <button class="hero-scroll-cue" id="hero-scroll-down" aria-label="Scroll down to explore anatomy">
+        <span class="scroll-cue-text">Explore Anatomy</span>
         <svg class="scroll-cue-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
           <path d="M12 5v14M5 12l7 7 7-7"/>
         </svg>
       </button>
+    </div>
+
+    <!-- ======================== EXPLODED ANATOMY (SCROLL-CONTROLLED VIDEO) ======================== -->
+    <div class="explode-section" id="hero-explode">
+      <div class="explode-sticky-wrapper">
+        <canvas id="explode-canvas" class="explode-canvas"></canvas>
+        <div class="explode-vignette"></div>
+
+        <!-- Dynamic Exploded Acoustic Callouts / Overlays -->
+        <div class="explode-callout-overlay">
+          <!-- Step 1 / Initial Assembly -->
+          <div class="explode-card active" data-card="0">
+            <span class="explode-eyebrow">Acoustic Architecture</span>
+            <h2 class="explode-title">Anatomy of the Perfect Sound</h2>
+            <p class="explode-desc">
+              Every GoodKnocks instrument is engineered to eliminate hollow case ping and deliver an authoritative, concert-tuned mechanical acoustic profile.
+            </p>
+            <div class="explode-scroll-indicator">
+              <span>Scroll to dissect</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+            </div>
+          </div>
+
+          <!-- Step 2 / Gaskets & Foam -->
+          <div class="explode-card" data-card="1">
+            <span class="explode-eyebrow">Layer 01 · Gasket Suspension</span>
+            <h2 class="explode-title">Isolated Poron Dampening</h2>
+            <p class="explode-desc">
+              Custom high-density IXPE switch pads and multi-tier Poron acoustic foam decouple the typing plate, absorbing stray resonance and vibration.
+            </p>
+          </div>
+
+          <!-- Step 3 / Monolith Case & Plate -->
+          <div class="explode-card" data-card="2">
+            <span class="explode-eyebrow">Layer 02 · Solid Brass &amp; CNC Alloy</span>
+            <h2 class="explode-title">Monolithic Resonance Chamber</h2>
+            <p class="explode-desc">
+              Precision CNC-machined 6063 aerospace aluminum case with custom internal brass balancing weights for deep, satisfying low-end harmonics.
+            </p>
+          </div>
+
+          <!-- Step 4 / Hand-Lubricated Switches & Keycaps -->
+          <div class="explode-card" data-card="3">
+            <span class="explode-eyebrow">Layer 03 · Tactile Actuation</span>
+            <h2 class="explode-title">Low-Profile Precision Glide</h2>
+            <p class="explode-desc">
+              Self-lubricating POM stems, gold-plated stainless clickbars, and sculpted dye-sub PBT keycaps engineered for fifty million flawless actuations.
+            </p>
+          </div>
+        </div>
+
+        <!-- Frame scrub progress bar -->
+        <div class="explode-progress-bar">
+          <div class="explode-progress-fill" id="explode-progress-fill"></div>
+        </div>
+      </div>
     </div>
 
     <!-- Founder Section: Full-Backdrop Portrait & Title/Subtitle -->

@@ -188,9 +188,9 @@
   });
 
   document.getElementById('hero-scroll-down')?.addEventListener('click', () => {
-    const founderSec = document.getElementById('hero-founder');
-    if (founderSec) {
-      founderSec.scrollIntoView({ behavior: 'smooth' });
+    const explodeSec = document.getElementById('hero-explode');
+    if (explodeSec) {
+      explodeSec.scrollIntoView({ behavior: 'smooth' });
     }
   });
 
@@ -677,12 +677,134 @@
     }
   });
 
+  /* ── Exploded Anatomy Scroll-Controlled Sequence ─────────────────── */
+  const TOTAL_EXPLODE_FRAMES = 153;
+  const explodeImages = [];
+  let isExplodeCanvasInitialized = false;
+  let currentExplodeFrameIndex = 0;
+  let isExplodeTicking = false;
+
+  function initExplodedScrollVideo() {
+    const canvas = document.getElementById('explode-canvas');
+    const hero = document.getElementById('hero');
+    const explodeSection = document.getElementById('hero-explode');
+    if (!canvas || !hero || !explodeSection) return;
+
+    const ctx = canvas.getContext('2d', { alpha: false });
+
+    function resizeCanvas() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const rect = canvas.getBoundingClientRect();
+      if (rect.width === 0 || rect.height === 0) return;
+      canvas.width = Math.round(rect.width * dpr);
+      canvas.height = Math.round(rect.height * dpr);
+      renderFrame(currentExplodeFrameIndex);
+    }
+
+    function renderFrame(index) {
+      if (index < 0 || index >= TOTAL_EXPLODE_FRAMES) return;
+      const img = explodeImages[index];
+      if (!img || !img.complete || img.naturalWidth === 0) return;
+
+      currentExplodeFrameIndex = index;
+      const cw = canvas.width;
+      const ch = canvas.height;
+      const iw = img.naturalWidth;
+      const ih = img.naturalHeight;
+
+      // Cover-fit framing: maintain crisp aspect ratio centered
+      const scale = Math.max(cw / iw, ch / ih);
+      const dw = Math.round(iw * scale);
+      const dh = Math.round(ih * scale);
+      const dx = Math.round((cw - dw) / 2);
+      const dy = Math.round((ch - dh) / 2);
+
+      ctx.fillStyle = '#100f0e';
+      ctx.fillRect(0, 0, cw, ch);
+      ctx.drawImage(img, dx, dy, dw, dh);
+    }
+
+    // Preload frames incrementally
+    for (let i = 1; i <= TOTAL_EXPLODE_FRAMES; i++) {
+      const numStr = String(i).padStart(3, '0');
+      const img = new Image();
+      img.src = `frames/ezgif-frame-${numStr}.jpg`;
+      img.onload = () => {
+        if (i === 1 && !isExplodeCanvasInitialized) {
+          isExplodeCanvasInitialized = true;
+          resizeCanvas();
+          renderFrame(0);
+        } else if (i - 1 === currentExplodeFrameIndex) {
+          renderFrame(currentExplodeFrameIndex);
+        }
+      };
+      explodeImages.push(img);
+    }
+
+    const cards = document.querySelectorAll('.explode-card');
+    const progressFill = document.getElementById('explode-progress-fill');
+
+    function updateExplodeScroll() {
+      isExplodeTicking = false;
+      if (state.currentSection !== 'hero') return;
+
+      const rect = explodeSection.getBoundingClientRect();
+      const sectionHeight = explodeSection.offsetHeight;
+      const windowHeight = window.innerHeight;
+      const totalScrollable = sectionHeight - windowHeight;
+
+      if (totalScrollable <= 0) return;
+
+      // Calculate scroll progress through the exploded section (0.0 to 1.0)
+      const currentScroll = -rect.top;
+      const progress = Math.max(0, Math.min(1, currentScroll / totalScrollable));
+
+      // Calculate target frame
+      const targetFrame = Math.min(
+        TOTAL_EXPLODE_FRAMES - 1,
+        Math.floor(progress * TOTAL_EXPLODE_FRAMES)
+      );
+
+      if (targetFrame !== currentExplodeFrameIndex) {
+        renderFrame(targetFrame);
+      }
+
+      if (progressFill) {
+        progressFill.style.width = `${(progress * 100).toFixed(1)}%`;
+      }
+
+      // Synchronize floating editorial callout cards with explosion layers
+      cards.forEach((card) => {
+        const cardIndex = parseInt(card.getAttribute('data-card'), 10);
+        let isActive = false;
+        if (cardIndex === 0 && progress >= 0.0 && progress <= 0.22) isActive = true;
+        else if (cardIndex === 1 && progress > 0.22 && progress <= 0.48) isActive = true;
+        else if (cardIndex === 2 && progress > 0.48 && progress <= 0.74) isActive = true;
+        else if (cardIndex === 3 && progress > 0.74 && progress <= 1.0) isActive = true;
+
+        card.classList.toggle('active', isActive);
+      });
+    }
+
+    function onScroll() {
+      if (!isExplodeTicking) {
+        requestAnimationFrame(updateExplodeScroll);
+        isExplodeTicking = true;
+      }
+    }
+
+    hero.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', resizeCanvas, { passive: true });
+    resizeCanvas();
+  }
+
   /* ── Initialization ───────────────────────────────────────────────── */
   function init() {
     updatePillNav('hero');
     updateKeyboardPreview();
     updateSwitchInternalPreview();
     initTypewriterEffect();
+    initExplodedScrollVideo();
   }
 
   if (document.fonts && document.fonts.ready) {
