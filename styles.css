@@ -727,8 +727,7 @@ img {
   align-items: center;
   justify-content: center;
   position: relative;
-  background: radial-gradient(circle at center 40%, rgba(255, 255, 255, 0.85) 0%, transparent 70%);
-  border-radius: 20px;
+  background: transparent;
   padding: 12px 16px;
 }
 
