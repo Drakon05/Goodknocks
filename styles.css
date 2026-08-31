@@ -500,6 +500,7 @@ img {
   line-height: 1.7;
   max-width: 520px;
   text-shadow: none;
+  margin-bottom: 24px;
 }
 
 /* ── Smooth CTA Button ────────────────────────────────────────────────── */
@@ -516,6 +517,7 @@ img {
   letter-spacing: 0.06em;
   text-transform: uppercase;
   border-radius: 60px;
+  margin-top: 6px;
   transition:
     transform 0.5s var(--ease-smooth),
     box-shadow 0.5s var(--ease-smooth),
