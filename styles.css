@@ -145,47 +145,94 @@ img {
   }
 }
 
-/* ── Hero Section ─────────────────────────────────────────────────────── */
-#hero {
-  justify-content: flex-start;
+/* ── Section: Hero (Unified Cinematic Scroll Track) ───────────────────── */
+.hero-cinematic-track {
+  position: relative;
+  width: 100%;
+  height: 420vh;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
-  padding-bottom: 0;
+  background: #100f0e;
+  padding: 0;
+  display: block;
 }
 
-.hero-screen {
-  position: relative;
+.hero-sticky-stage {
+  position: sticky;
+  top: 0;
+  left: 0;
   width: 100%;
-  min-height: 100dvh;
+  height: 100dvh;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #100f0e;
+}
+
+.hero-stage-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  filter: contrast(1.05) brightness(0.92) blur(0.5px);
+  will-change: transform;
+}
+
+.hero-founder-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  opacity: 0;
+  pointer-events: none;
+  overflow: hidden;
+  will-change: opacity;
+}
+
+.hero-founder-backdrop .founder-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 48%;
+  filter: contrast(1.06) brightness(0.68) blur(2px);
+  transform: scale(1.04);
+}
+
+.hero-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0.68) 100%),
+              linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, transparent 22%, transparent 78%, rgba(0, 0, 0, 0.7) 100%);
+}
+
+.hero-content-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
+  text-align: center;
   padding: 40px 24px 80px;
+  pointer-events: auto;
+  will-change: opacity, transform;
+  transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
-.hero-bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  overflow: hidden;
-}
-
-.hero-bg img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 32%;
-  filter: contrast(1.04) brightness(0.92) blur(2.5px);
-  transform: scale(1.05);
-  transition: transform 3s var(--ease-smooth);
+.hero-content-layer.faded-out {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .hero-scroll-cue {
   position: absolute;
-  bottom: 24px;
+  bottom: calc(var(--nav-height) + 16px);
   left: 50%;
   transform: translateX(-50%);
   z-index: 3;
@@ -222,52 +269,11 @@ img {
   animation: cue-bounce 2s infinite ease-in-out;
 }
 
-/* ── Exploded Anatomy Scroll-Controlled Sequence ──────────────────────── */
-.explode-section {
-  position: relative;
-  width: 100%;
-  height: 380vh;
-  background: #100f0e;
-  z-index: 1;
-}
-
-.explode-sticky-wrapper {
-  position: sticky;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100dvh;
-  height: 100vh;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #100f0e;
-}
-
-.explode-canvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  filter: contrast(1.05) brightness(0.92) blur(0.5px);
-  will-change: transform;
-}
-
-.explode-vignette {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0.68) 100%),
-              linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, transparent 22%, transparent 78%, rgba(0, 0, 0, 0.7) 100%);
-}
-
+/* ── Disassembly Acoustic Storytelling Callouts ────────────────────────── */
 .explode-callout-overlay {
   position: absolute;
   inset: 0;
-  z-index: 3;
+  z-index: 4;
   pointer-events: none;
   display: flex;
   align-items: center;
@@ -287,7 +293,7 @@ img {
   color: #ffffff;
   opacity: 0;
   transform: translateY(22px);
-  transition: opacity 0.5s var(--ease-fade), transform 0.55s var(--ease-luxury);
+  transition: opacity 0.45s var(--ease-fade), transform 0.5s var(--ease-luxury);
   pointer-events: auto;
   box-shadow: 0 20px 48px rgba(0, 0, 0, 0.4);
 }
@@ -325,22 +331,6 @@ img {
   color: rgba(255, 255, 255, 0.88);
 }
 
-.explode-scroll-indicator {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 16px;
-  font-size: 0.72rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--accent-light, #A68460);
-  opacity: 0.9;
-}
-
-.explode-scroll-indicator svg {
-  animation: cue-bounce 2s infinite ease-in-out;
-}
-
 .explode-progress-bar {
   position: absolute;
   bottom: calc(var(--nav-height) + 16px);
@@ -351,7 +341,7 @@ img {
   background: rgba(255, 255, 255, 0.16);
   border-radius: 4px;
   overflow: hidden;
-  z-index: 4;
+  z-index: 5;
 }
 
 .explode-progress-fill {
@@ -362,11 +352,11 @@ img {
   transition: width 0.08s linear;
 }
 
-/* ── Founder Section (Full-Backdrop Portrait & Vision) ────────────────── */
-.founder-section {
-  position: relative;
-  width: 100%;
-  min-height: 100dvh;
+/* ── Section 2: Founder Layer (Final resting view of the scroll) ───────── */
+.hero-founder-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -375,13 +365,16 @@ img {
   padding: 56px 24px calc(var(--nav-height) + 28px);
   overflow: hidden;
   box-sizing: border-box;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  transform: translateY(16px);
 }
 
-.founder-bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  overflow: hidden;
+.hero-founder-layer.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
 }
 
 .founder-bg-img {

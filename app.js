@@ -188,9 +188,10 @@
   });
 
   document.getElementById('hero-scroll-down')?.addEventListener('click', () => {
-    const explodeSec = document.getElementById('hero-explode');
-    if (explodeSec) {
-      explodeSec.scrollIntoView({ behavior: 'smooth' });
+    const hero = document.getElementById('hero');
+    if (hero) {
+      const targetScroll = (hero.scrollHeight - hero.clientHeight) * 0.25;
+      hero.scrollTo({ top: targetScroll, behavior: 'smooth' });
     }
   });
 
@@ -687,8 +688,13 @@
   function initExplodedScrollVideo() {
     const canvas = document.getElementById('explode-canvas');
     const hero = document.getElementById('hero');
-    const explodeSection = document.getElementById('hero-explode');
-    if (!canvas || !hero || !explodeSection) return;
+    const heroContentLayer = document.getElementById('hero-content-layer');
+    const founderBackdrop = document.getElementById('hero-founder-backdrop');
+    const founderLayer = document.getElementById('hero-founder-layer');
+    const cards = document.querySelectorAll('.explode-card');
+    const progressFill = document.getElementById('explode-progress-fill');
+
+    if (!canvas || !hero) return;
 
     const ctx = canvas.getContext('2d', { alpha: false });
 
@@ -741,28 +747,21 @@
       explodeImages.push(img);
     }
 
-    const cards = document.querySelectorAll('.explode-card');
-    const progressFill = document.getElementById('explode-progress-fill');
-
     function updateExplodeScroll() {
       isExplodeTicking = false;
       if (state.currentSection !== 'hero') return;
 
-      const rect = explodeSection.getBoundingClientRect();
-      const sectionHeight = explodeSection.offsetHeight;
-      const windowHeight = window.innerHeight;
-      const totalScrollable = sectionHeight - windowHeight;
-
+      const totalScrollable = hero.scrollHeight - hero.clientHeight;
       if (totalScrollable <= 0) return;
 
-      // Calculate scroll progress through the exploded section (0.0 to 1.0)
-      const currentScroll = -rect.top;
-      const progress = Math.max(0, Math.min(1, currentScroll / totalScrollable));
+      // Overall scroll progress: 0.0 (Section 1: Hero) -> 1.0 (Section 2: Founder)
+      const progress = Math.max(0, Math.min(1, hero.scrollTop / totalScrollable));
 
-      // Calculate target frame
+      // Calculate target frame across the sequence (0 to 152)
+      const animProgress = Math.max(0, Math.min(1, (progress - 0.04) / 0.80));
       const targetFrame = Math.min(
         TOTAL_EXPLODE_FRAMES - 1,
-        Math.floor(progress * TOTAL_EXPLODE_FRAMES)
+        Math.floor(animProgress * TOTAL_EXPLODE_FRAMES)
       );
 
       if (targetFrame !== currentExplodeFrameIndex) {
@@ -773,17 +772,39 @@
         progressFill.style.width = `${(progress * 100).toFixed(1)}%`;
       }
 
-      // Synchronize floating editorial callout cards with explosion layers
+      // ── Section 1: Hero Content fade ──
+      if (heroContentLayer) {
+        if (progress <= 0.16) {
+          const heroAlpha = Math.max(0, 1 - progress / 0.14);
+          heroContentLayer.style.opacity = heroAlpha;
+          heroContentLayer.style.transform = `translateY(-${progress * 80}px)`;
+          heroContentLayer.classList.toggle('faded-out', heroAlpha <= 0.05);
+        } else {
+          heroContentLayer.style.opacity = 0;
+          heroContentLayer.classList.add('faded-out');
+        }
+      }
+
+      // ── Disassembly Acoustic Storytelling Callouts (0.18 -> 0.78) ──
       cards.forEach((card) => {
         const cardIndex = parseInt(card.getAttribute('data-card'), 10);
         let isActive = false;
-        if (cardIndex === 0 && progress >= 0.0 && progress <= 0.22) isActive = true;
-        else if (cardIndex === 1 && progress > 0.22 && progress <= 0.48) isActive = true;
-        else if (cardIndex === 2 && progress > 0.48 && progress <= 0.74) isActive = true;
-        else if (cardIndex === 3 && progress > 0.74 && progress <= 1.0) isActive = true;
+        if (cardIndex === 0 && progress >= 0.18 && progress <= 0.38) isActive = true;
+        else if (cardIndex === 1 && progress > 0.38 && progress <= 0.58) isActive = true;
+        else if (cardIndex === 2 && progress > 0.58 && progress <= 0.78) isActive = true;
 
         card.classList.toggle('active', isActive);
       });
+
+      // ── Section 2: Founder Backdrop Crossfade & Content (0.80 -> 1.0) ──
+      if (founderBackdrop) {
+        const founderAlpha = Math.max(0, Math.min(1, (progress - 0.80) / 0.14));
+        founderBackdrop.style.opacity = founderAlpha;
+      }
+      if (founderLayer) {
+        const isFounderActive = progress >= 0.82;
+        founderLayer.classList.toggle('active', isFounderActive);
+      }
     }
 
     function onScroll() {
@@ -796,6 +817,7 @@
     hero.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', resizeCanvas, { passive: true });
     resizeCanvas();
+    updateExplodeScroll();
   }
 
   /* ── Initialization ───────────────────────────────────────────────── */
