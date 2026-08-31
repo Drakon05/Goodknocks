@@ -777,16 +777,11 @@
         }
       }
 
-      // ── Disassembly Acoustic Storytelling Callouts (0.20 -> 0.92) ──
-      cards.forEach((card) => {
-        const cardIndex = parseInt(card.getAttribute('data-card'), 10);
-        let isActive = false;
-        if (cardIndex === 0 && progress >= 0.20 && progress <= 0.42) isActive = true;
-        else if (cardIndex === 1 && progress > 0.42 && progress <= 0.68) isActive = true;
-        else if (cardIndex === 2 && progress > 0.68 && progress <= 0.92) isActive = true;
-
-        card.classList.toggle('active', isActive);
-      });
+      // ── Disassembly Acoustic Storytelling (Show only one card at end of sequence) ──
+      const summaryCard = document.getElementById('explode-summary-card');
+      if (summaryCard) {
+        summaryCard.classList.toggle('active', progress >= 0.78);
+      }
     }
 
     function onScroll() {
