@@ -235,64 +235,63 @@
     return `${state.config.bodyColor.name} · ${finishNames[state.config.finish]} · ${switchSpecs[state.config.switchType].name} · ${state.config.accent.name}`;
   }
 
-  /* ── Full Keyboard Preview Updates ────────────────────────────────── */
-  function updateKeyboardPreview() {
-    const chassisHex = state.config.bodyColor.hex;
-    const accentHex = state.config.accent.hex;
-    const glowColor = switchSpecs[state.config.switchType].glow;
+  /* ── SVG Configuration Applier ────────────────────────────────────── */
+  function applySvgConfig(svg, config) {
+    const chassisHex = config.bodyColor.hex;
+    const accentHex = config.accent.hex;
+    const glowColor = switchSpecs[config.switchType].glow;
 
-    document.querySelectorAll('.keyboard-svg').forEach((svg) => {
-      // Chassis unibody
-      svg.querySelectorAll('.kb-chassis').forEach((el) => {
-        el.style.fill = chassisHex;
-      });
-
-      // Accent elements
-      svg.querySelectorAll('.kb-accent-element').forEach((el) => {
-        el.style.fill = accentHex;
-      });
-      svg.querySelectorAll('.kb-accent-chamfer').forEach((el) => {
-        el.style.stroke = accentHex;
-      });
-      svg.querySelectorAll('.kb-accent-bar').forEach((el) => {
-        el.style.fill = accentHex;
-      });
-      svg.querySelectorAll('.kb-accent-led').forEach((el) => {
-        el.style.fill = accentHex;
-      });
-
-      // Switch Aura Glow
-      svg.querySelectorAll('.kb-switch-aura').forEach((el) => {
-        el.style.stroke = glowColor;
-      });
-
-      // Surface Finish
-      const parent =
-        svg.closest('.keyboard-preview-container') || svg.parentElement;
-      if (parent) {
-        parent.classList.remove(
-          'finish-matte',
-          'finish-metallic',
-          'finish-gloss'
-        );
-        parent.classList.add(`finish-${state.config.finish}`);
-      }
-
-      // Finish Highlight Rect
-      const highlight = svg.querySelector('.kb-finish-highlight');
-      if (highlight) {
-        if (state.config.finish === 'matte') {
-          highlight.style.fill = 'none';
-          highlight.style.opacity = '0';
-        } else if (state.config.finish === 'metallic') {
-          highlight.style.fill = 'url(#finish-grad-metallic)';
-          highlight.style.opacity = '0.24';
-        } else {
-          highlight.style.fill = 'url(#finish-grad-gloss)';
-          highlight.style.opacity = '0.38';
-        }
-      }
+    // Chassis unibody
+    svg.querySelectorAll('.kb-chassis').forEach((el) => {
+      el.style.fill = chassisHex;
     });
+
+    // Accent elements
+    svg.querySelectorAll('.kb-accent-element').forEach((el) => {
+      el.style.fill = accentHex;
+    });
+    svg.querySelectorAll('.kb-accent-chamfer').forEach((el) => {
+      el.style.stroke = accentHex;
+    });
+    svg.querySelectorAll('.kb-accent-bar').forEach((el) => {
+      el.style.fill = accentHex;
+    });
+    svg.querySelectorAll('.kb-accent-led').forEach((el) => {
+      el.style.fill = accentHex;
+    });
+
+    // Switch Aura Glow
+    svg.querySelectorAll('.kb-switch-aura').forEach((el) => {
+      el.style.stroke = glowColor;
+    });
+
+    // Surface Finish highlight
+    const highlight = svg.querySelector('.kb-finish-highlight');
+    if (highlight) {
+      if (config.finish === 'matte') {
+        highlight.style.fill = 'none';
+        highlight.style.opacity = '0';
+      } else if (config.finish === 'metallic') {
+        highlight.style.fill = 'url(#finish-grad-metallic)';
+        highlight.style.opacity = '0.24';
+      } else {
+        highlight.style.fill = 'url(#finish-grad-gloss)';
+        highlight.style.opacity = '0.38';
+      }
+    }
+  }
+
+  /* ── Full Keyboard Preview Updates (With White Line Wipe Transition) ─ */
+  let activeWipeAnimation = null;
+
+  function updateKeyboardPreview(animateWipe = false) {
+    const activeSection = document.querySelector('.section.active');
+    const previewContainer = activeSection?.querySelector(
+      '.keyboard-preview-container'
+    );
+    const baseSvg = previewContainer?.querySelector(
+      '.keyboard-svg:not(.kb-wipe-svg)'
+    );
 
     // Update labels with gentle crossfade
     document
@@ -307,6 +306,87 @@
 
     // Update dynamic selected option callout cards
     updateSelectedOptionDescriptions();
+
+    if (!animateWipe || !previewContainer || !baseSvg) {
+      updateKeyboardPreviewDirect();
+      return;
+    }
+
+    // Cancel running wipe if any
+    if (activeWipeAnimation) {
+      try {
+        activeWipeAnimation.cancel();
+      } catch (e) {}
+      activeWipeAnimation = null;
+    }
+    previewContainer
+      .querySelectorAll('.kb-wipe-wrapper')
+      .forEach((w) => w.remove());
+
+    // Create wipe overlay wrapper
+    const wipeWrapper = document.createElement('div');
+    wipeWrapper.className = 'kb-wipe-wrapper';
+
+    // Clone SVG with new state
+    const wipeSvg = baseSvg.cloneNode(true);
+    wipeSvg.classList.add('kb-wipe-svg');
+    applySvgConfig(wipeSvg, state.config);
+
+    // Create solid white wipe bar (a clean white line with a little thickness)
+    const wipeBar = document.createElement('div');
+    wipeBar.className = 'kb-wipe-bar';
+
+    wipeWrapper.appendChild(wipeSvg);
+    wipeWrapper.appendChild(wipeBar);
+    previewContainer.appendChild(wipeWrapper);
+
+    const duration = 420; // ms
+    const easing = 'cubic-bezier(0.22, 1, 0.36, 1)';
+
+    const svgAnim = wipeSvg.animate(
+      [
+        { clipPath: 'inset(0 100% 0 0)' },
+        { clipPath: 'inset(0 0% 0 0)' },
+      ],
+      { duration, easing, fill: 'forwards' }
+    );
+
+    wipeBar.animate(
+      [{ left: '0%' }, { left: '100%' }],
+      { duration, easing, fill: 'forwards' }
+    );
+
+    activeWipeAnimation = svgAnim;
+
+    svgAnim.onfinish = () => {
+      updateKeyboardPreviewDirect();
+      wipeWrapper.remove();
+      activeWipeAnimation = null;
+    };
+
+    svgAnim.oncancel = () => {
+      wipeWrapper.remove();
+      activeWipeAnimation = null;
+    };
+  }
+
+  function updateKeyboardPreviewDirect() {
+    document
+      .querySelectorAll('.keyboard-svg:not(.kb-wipe-svg)')
+      .forEach((svg) => {
+        applySvgConfig(svg, state.config);
+
+        const parent =
+          svg.closest('.keyboard-preview-container') || svg.parentElement;
+        if (parent) {
+          parent.classList.remove(
+            'finish-matte',
+            'finish-metallic',
+            'finish-gloss'
+          );
+          parent.classList.add(`finish-${state.config.finish}`);
+        }
+      });
   }
 
   /* ── Dynamic Selected Option Descriptions ─────────────────────────── */
@@ -423,7 +503,7 @@
         .forEach((c) => c.classList.remove('selected'));
       card.classList.add('selected');
 
-      updateKeyboardPreview();
+      updateKeyboardPreview(true);
     });
   });
 
@@ -442,7 +522,7 @@
         finishIndicator.style.transform = `translateX(${index * 100}%)`;
       }
 
-      updateKeyboardPreview();
+      updateKeyboardPreview(true);
     });
   });
 
@@ -457,7 +537,7 @@
       card.classList.add('selected');
 
       updateSwitchInternalPreview();
-      updateKeyboardPreview();
+      updateKeyboardPreview(false);
     });
   });
 
@@ -473,7 +553,7 @@
         .forEach((c) => c.classList.remove('selected'));
       card.classList.add('selected');
 
-      updateKeyboardPreview();
+      updateKeyboardPreview(true);
     });
   });
 
