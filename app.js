@@ -885,6 +885,12 @@
 
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+    // Immediately preload all drift wall images into browser cache
+    [...gamingImages, ...officeImages].forEach(item => {
+      const preloadImg = new Image();
+      preloadImg.src = item.image;
+    });
+
     const unit = cfg.tileHeight + cfg.gap;
     let containerHeight = container.clientHeight || 600;
 
@@ -942,7 +948,7 @@
           tile.tabIndex = 0;
           tile.setAttribute('role', 'button');
           tile.setAttribute('aria-label', item.title || 'tile');
-          tile.innerHTML = `<span class="drift-wall__inner"><img src="${item.image}" alt="${item.title || ''}" loading="lazy" decoding="async" draggable="false"><span class="drift-wall__overlay" aria-hidden="true"></span></span>`;
+          tile.innerHTML = `<span class="drift-wall__inner"><img src="${item.image}" alt="${item.title || ''}" loading="eager" decoding="sync" draggable="false"><span class="drift-wall__overlay" aria-hidden="true"></span></span>`;
 
           tile.addEventListener('focus', () => { activeId = id; hoveredCol = c; tile.classList.add('is-active'); });
           tile.addEventListener('blur',  () => { if (activeId === id) { activeId = null; hoveredCol = -1; } tile.classList.remove('is-active'); });
