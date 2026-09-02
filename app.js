@@ -833,9 +833,9 @@
       pauseOnHover: false,
       lift: 64,
       fade: 0.6,
-      dim: 0.55,
+      dim: 0.82,
       grayscale: false,
-      overlayColor: '#060010',
+      overlayColor: 'rgba(248, 246, 240, 0.25)',
     };
 
     // Set CSS variables on container
