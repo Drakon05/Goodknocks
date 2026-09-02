@@ -802,16 +802,51 @@
     const container = document.getElementById('founder-driftwall');
     if (!container) return;
 
-    const rawItems = [
-      { image: 'Founder pics/WhatsApp Image 2026-09-01 at 13.56.36.jpeg', title: 'Studio Iterations' },
-      { image: 'Founder pics/WhatsApp Image 2026-09-01 at 13.56.56.jpeg', title: 'Devotion to Detail' },
-      { image: 'Founder pics/WhatsApp Image 2026-09-01 at 13.57.08.jpeg', title: 'Acoustic Calibration' },
-      { image: 'Founder pics/WhatsApp Image 2026-09-01 at 13.57.22.jpeg', title: 'Machined Architecture' },
-      { image: 'Founder pics/WhatsApp Image 2026-09-01 at 13.59.27.jpeg', title: 'Tactile Harmony' },
-      { image: 'Founder pics/WhatsApp Image 2026-09-01 at 13.59.50.jpeg', title: 'Monolithic Form' },
-      { image: 'founder-kaushal.jpg', title: 'Kaushal — Founder' },
+    const gamingImages = [
+      { image: 'gaming keybs/Computer Stuff Pin.jpg', title: 'Cluttered Gaming Keyboard' },
+      { image: 'gaming keybs/Custom Keyboard.jpg', title: 'Bulky Custom Board' },
+      { image: 'gaming keybs/Gold Bar Style Enter Keycap.jpg', title: 'Gimmick Keycaps' },
+      { image: 'gaming keybs/Keyboard.jpg', title: 'Over-engineered Deck' },
+      { image: 'gaming keybs/Keyboards Pin.jpg', title: 'Loud RGB Aesthetics' },
+      { image: 'gaming keybs/Nuphy Field75 HE Magnetic.jpg', title: 'Complex Gamer Layout' },
+      { image: 'gaming keybs/PIIFOX Mechanical Keyboard.jpg', title: 'Chunky Transparent Deck' },
+      { image: 'gaming keybs/Quick Saves Pin.jpg', title: 'Aggressive Gamer Style' },
+      { image: 'gaming keybs/Rainbow Mechanical Keyboard.jpg', title: 'Rainbow Lighting' },
+      { image: 'gaming keybs/Setup Pin.jpg', title: 'Bulky Profile' },
+      { image: 'gaming keybs/Simpan Cepat Pin.jpg', title: 'Plastic Gaming Deck' },
+      { image: 'gaming keybs/Soft Jade Mixed Lamp Keycaps.jpg', title: 'Over-decorated Keycaps' },
+      { image: 'gaming keybs/Workspaces Aesthetic Pin.jpg', title: 'High-Profile Mechanical' },
     ];
-    const items = [...rawItems, ...rawItems, ...rawItems];
+
+    const officeImages = [
+      { image: 'office keybs/Hymen Auditorium Pin.jpg', title: 'Minimalist Desk' },
+      { image: 'office keybs/Lofree Flow On-the-go.jpg', title: 'Low-Profile Slim' },
+      { image: 'office keybs/Lofree Low-profile Keyboard.jpg', title: 'Clean Architecture' },
+      { image: 'office keybs/Logitech 111.jpg', title: 'Focused Workspace' },
+      { image: 'office keybs/Video Game Room Design.jpg', title: 'Sculpted Monolith' },
+    ];
+
+    // Distribute first 2 columns as gaming keyboards, next 2 columns as minimal office keyboards
+    const gamingCol0 = [];
+    const gamingCol1 = [];
+    gamingImages.forEach((item, i) => {
+      if (i % 2 === 0) gamingCol0.push(item);
+      else gamingCol1.push(item);
+    });
+
+    const officeCol2 = [];
+    const officeCol3 = [];
+    officeImages.forEach((item, i) => {
+      if (i % 2 === 0) officeCol2.push(item);
+      else officeCol3.push(item);
+    });
+
+    const columnItems = [
+      [...gamingCol0, ...gamingCol0],
+      [...gamingCol1, ...gamingCol1],
+      [...officeCol2, ...officeCol2, ...officeCol2],
+      [...officeCol3, ...officeCol3, ...officeCol3],
+    ];
 
     const cfg = {
       columns: 4,
@@ -850,15 +885,11 @@
 
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // ── Partition items into columns ──
-    const columnItems = Array.from({ length: cfg.columns }, () => []);
-    items.forEach((item, i) => columnItems[i % cfg.columns].push(item));
-
     const unit = cfg.tileHeight + cfg.gap;
     let containerHeight = container.clientHeight || 600;
 
     const getColumnMeta = () => columnItems.map(col => {
-      const arr = col.length ? col : items.slice(0, 1);
+      const arr = col.length ? col : gamingImages.slice(0, 1);
       const copyHeight = Math.max(unit, arr.length * unit);
       const copies = Math.max(2, Math.ceil((containerHeight * 1.6) / copyHeight) + 1);
       return { arr, copyHeight, copies };
