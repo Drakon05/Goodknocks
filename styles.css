@@ -432,15 +432,17 @@ img {
   display: flex;
   flex-direction: row;
   transform-style: preserve-3d;
-  cursor: pointer;
+  cursor: grab;
   transform-origin: 50% 50%;
   will-change: transform;
+  backface-visibility: hidden;
 }
 
 .drift-wall__col {
   position: relative;
   width: calc(var(--dw-tile-w) + var(--dw-gap));
   transform-style: preserve-3d;
+  backface-visibility: hidden;
 }
 
 .drift-wall__track {
@@ -448,6 +450,7 @@ img {
   flex-direction: column;
   will-change: transform;
   transform-style: preserve-3d;
+  backface-visibility: hidden;
 }
 
 .drift-wall__tile {
@@ -458,6 +461,9 @@ img {
   flex: 0 0 auto;
   outline: none;
   transform-style: preserve-3d;
+  pointer-events: auto;
+  cursor: pointer;
+  backface-visibility: hidden;
 }
 
 .drift-wall__inner {
@@ -471,10 +477,11 @@ img {
   transform: translateZ(0);
   pointer-events: none;
   box-shadow: 0 10px 30px -4px rgba(24, 23, 22, 0.12);
+  will-change: transform, opacity, box-shadow;
   transition:
-    transform 0.42s cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 0.42s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.35s ease,
+    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .drift-wall__tile img {

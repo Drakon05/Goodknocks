@@ -915,6 +915,25 @@
               <span class="drift-wall__overlay" aria-hidden="true"></span>
             </span>
           `;
+
+          // Direct tile hover events — eliminates 3D coordinate jitter
+          tile.addEventListener('pointerenter', () => {
+            if (activeTile && activeTile !== tile) {
+              activeTile.classList.remove('is-active');
+            }
+            activeTile = tile;
+            activeTile.classList.add('is-active');
+            hoveredCol = c;
+          });
+
+          tile.addEventListener('pointerleave', () => {
+            tile.classList.remove('is-active');
+            if (activeTile === tile) {
+              activeTile = null;
+              hoveredCol = -1;
+            }
+          });
+
           trackEl.appendChild(tile);
         });
       }
@@ -959,20 +978,8 @@
       const rect = container.getBoundingClientRect();
       if (!rect) return;
       if (config.parallax > 0 && !prefersReduced) {
-        pointer.x = (e.clientX - rect.left) / rect.width - 0.5;
-        pointer.y = (e.clientY - rect.top) / rect.height - 0.5;
-      }
-      const hit = document.elementFromPoint(e.clientX, e.clientY);
-      const tile = hit ? hit.closest('[data-tile-id]') : null;
-      if (tile !== activeTile) {
-        if (activeTile) activeTile.classList.remove('is-active');
-        activeTile = tile;
-        if (tile) {
-          tile.classList.add('is-active');
-          hoveredCol = Number(tile.dataset.col);
-        } else {
-          hoveredCol = -1;
-        }
+        pointer.x = Math.max(-0.5, Math.min(0.5, (e.clientX - rect.left) / rect.width - 0.5));
+        pointer.y = Math.max(-0.5, Math.min(0.5, (e.clientY - rect.top) / rect.height - 0.5));
       }
     });
 
@@ -985,13 +992,13 @@
 
     function animate(ts) {
       if (lastTs === null) lastTs = ts;
-      const dt = Math.min(0.05, Math.max(0, ts - lastTs) / 1000);
+      const dt = Math.min(0.05, Math.max(0.001, (ts - lastTs) / 1000));
       lastTs = ts;
 
       const maxTilt = config.parallax * 8;
       const targetX = pointer.x * maxTilt;
       const targetY = -pointer.y * maxTilt;
-      const damp = 1 - Math.exp(-dt / 0.12);
+      const damp = 1 - Math.exp(-dt / 0.14);
       pointerDamped.x += (targetX - pointerDamped.x) * damp;
       pointerDamped.y += (targetY - pointerDamped.y) * damp;
       applyPlaneTransform(pointerDamped.x, pointerDamped.y);
@@ -1004,7 +1011,7 @@
           const factor = paused || hoveredCol === c ? 0 : 1;
           const target = baseVelocities[c] * factor;
 
-          const ease = 1 - Math.exp(-dt / (target === 0 ? 0.16 : 0.28));
+          const ease = 1 - Math.exp(-dt / (target === 0 ? 0.25 : 0.4));
           velocities[c] += (target - velocities[c]) * ease;
           let next = (offsets[c] ?? 0) + velocities[c] * dt;
           next = ((next % meta.copyHeight) + meta.copyHeight) % meta.copyHeight;
