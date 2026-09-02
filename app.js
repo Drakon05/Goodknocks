@@ -885,9 +885,17 @@
 
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Immediately preload all drift wall images into browser cache
-    [...gamingImages, ...officeImages].forEach(item => {
+    // Interleave preloads so left and right columns load simultaneously instead of sequentially
+    const preloadList = [];
+    const maxLen = Math.max(gamingImages.length, officeImages.length);
+    for (let i = 0; i < maxLen; i++) {
+      if (i < officeImages.length) preloadList.push(officeImages[i]);
+      if (i < gamingImages.length) preloadList.push(gamingImages[i]);
+    }
+    
+    preloadList.forEach(item => {
       const preloadImg = new Image();
+      preloadImg.fetchPriority = 'high';
       preloadImg.src = item.image;
     });
 
@@ -948,7 +956,7 @@
           tile.tabIndex = 0;
           tile.setAttribute('role', 'button');
           tile.setAttribute('aria-label', item.title || 'tile');
-          tile.innerHTML = `<span class="drift-wall__inner"><img src="${item.image}" alt="${item.title || ''}" loading="eager" decoding="sync" draggable="false"><span class="drift-wall__overlay" aria-hidden="true"></span></span>`;
+          tile.innerHTML = `<span class="drift-wall__inner"><img src="${item.image}" alt="${item.title || ''}" loading="eager" decoding="sync" fetchpriority="high" draggable="false"><span class="drift-wall__overlay" aria-hidden="true"></span></span>`;
 
           tile.addEventListener('focus', () => { activeId = id; hoveredCol = c; tile.classList.add('is-active'); });
           tile.addEventListener('blur',  () => { if (activeId === id) { activeId = null; hoveredCol = -1; } tile.classList.remove('is-active'); });
