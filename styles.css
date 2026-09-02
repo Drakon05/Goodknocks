@@ -374,9 +374,9 @@ img {
 
 .story-section .story-text {
   font-family: var(--font-body);
-  font-size: clamp(0.96rem, 1.3vw, 1.1rem);
+  font-size: clamp(1.05rem, 1.4vw, 1.22rem);
   font-weight: 300;
-  line-height: 1.82;
+  line-height: 1.8;
   color: var(--text-secondary, #58534b);
   display: flex;
   flex-direction: column;
