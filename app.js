@@ -797,7 +797,7 @@
     updateExplodeScroll();
   }
 
-  /* ── DriftWall Component Integration (React Bits in Vanilla JS) ────── */
+  /* ── DriftWall Component (faithful port of React Bits source) ────────── */
   function initDriftWall() {
     const container = document.getElementById('founder-driftwall');
     if (!container) return;
@@ -811,11 +811,9 @@
       { image: 'Founder pics/WhatsApp Image 2026-09-01 at 13.59.50.jpeg', title: 'Monolithic Form' },
       { image: 'founder-kaushal.jpg', title: 'Kaushal — Founder' },
     ];
-
-    // Multiply items for visual density and continuous looping
     const items = [...rawItems, ...rawItems, ...rawItems];
 
-    const config = {
+    const cfg = {
       columns: 4,
       tileWidth: 200,
       tileHeight: 132,
@@ -838,56 +836,60 @@
       overlayColor: 'rgba(248, 246, 240, 0.25)',
     };
 
-    // Set CSS variables on container
-    container.style.setProperty('--dw-tile-w', `${config.tileWidth}px`);
-    container.style.setProperty('--dw-tile-h', `${config.tileHeight}px`);
-    container.style.setProperty('--dw-gap', `${config.gap}px`);
-    container.style.setProperty('--dw-radius', `${config.radius}px`);
-    container.style.setProperty('--dw-perspective', `${config.perspective}px`);
-    container.style.setProperty('--dw-lift', `${config.lift}px`);
-    container.style.setProperty('--dw-dim', config.dim);
-    container.style.setProperty('--dw-gray', config.grayscale ? 1 : 0);
-    container.style.setProperty('--dw-overlay', config.overlayColor);
-    container.style.setProperty('--dw-edge', `${Math.max(0, (1 - config.fade) * 100)}%`);
+    // CSS variables
+    container.style.setProperty('--dw-tile-w', `${cfg.tileWidth}px`);
+    container.style.setProperty('--dw-tile-h', `${cfg.tileHeight}px`);
+    container.style.setProperty('--dw-gap', `${cfg.gap}px`);
+    container.style.setProperty('--dw-radius', `${cfg.radius}px`);
+    container.style.setProperty('--dw-perspective', `${cfg.perspective}px`);
+    container.style.setProperty('--dw-lift', `${cfg.lift}px`);
+    container.style.setProperty('--dw-dim', cfg.dim);
+    container.style.setProperty('--dw-gray', cfg.grayscale ? 1 : 0);
+    container.style.setProperty('--dw-overlay', cfg.overlayColor);
+    container.style.setProperty('--dw-edge', `${Math.max(0, (1 - cfg.fade) * 100)}%`);
 
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReduced) {
-      container.classList.add('drift-wall--reduced');
-    }
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Partition items into columns
-    const columnItems = Array.from({ length: config.columns }, () => []);
-    items.forEach((item, i) => columnItems[i % config.columns].push(item));
+    // ── Partition items into columns ──
+    const columnItems = Array.from({ length: cfg.columns }, () => []);
+    items.forEach((item, i) => columnItems[i % cfg.columns].push(item));
 
+    const unit = cfg.tileHeight + cfg.gap;
     let containerHeight = container.clientHeight || 600;
-    const unit = config.tileHeight + config.gap;
 
-    function calculateMeta() {
-      return columnItems.map(col => {
-        const colArr = col.length ? col : items.slice(0, 1);
-        const copyHeight = Math.max(unit, colArr.length * unit);
-        const copies = Math.max(2, Math.ceil((containerHeight * 1.6) / copyHeight) + 1);
-        return { colArr, copyHeight, copies };
-      });
-    }
+    const getColumnMeta = () => columnItems.map(col => {
+      const arr = col.length ? col : items.slice(0, 1);
+      const copyHeight = Math.max(unit, arr.length * unit);
+      const copies = Math.max(2, Math.ceil((containerHeight * 1.6) / copyHeight) + 1);
+      return { arr, copyHeight, copies };
+    });
 
-    let columnMeta = calculateMeta();
+    let columnMeta = getColumnMeta();
 
-    const columnFactor = (index, variance) => {
-      const pseudo = ((index * 0.6180339887 + 0.35) % 1) * 2 - 1;
-      return 1 + variance * pseudo;
+    const colFactor = (i) => {
+      const p = ((i * 0.6180339887 + 0.35) % 1) * 2 - 1;
+      return 1 + cfg.variance * p;
     };
 
-    const dirSign = config.direction === 'up' ? 1 : -1;
+    const dirSign = cfg.direction === 'up' ? 1 : -1;
     const baseVelocities = columnItems.map((_, c) => {
       const altSign = c % 2 === 0 ? 1 : -1;
-      return config.speed * columnFactor(c, config.variance) * dirSign * altSign;
+      return cfg.speed * colFactor(c) * dirSign * altSign;
     });
 
     let offsets = columnMeta.map((meta, c) => meta.copyHeight * ((c * 0.37) % 1));
     let velocities = columnItems.map(() => 0);
 
-    // Build DOM
+    // ── Mutable state (declared before DOM build so event closures are valid) ──
+    let activeId = null;    // string tile id, like React's activeIdRef
+    let hoveredCol = -1;
+    let wallHovered = false;
+    const pointer = { x: 0, y: 0 };
+    const pointerDamped = { x: 0, y: 0 };
+    let lastTs = null;
+    let rafId = null;
+
+    // ── Build DOM ──
     const plane = document.createElement('div');
     plane.className = 'drift-wall__plane';
     const trackRefs = [];
@@ -900,39 +902,19 @@
       trackRefs.push(trackEl);
 
       for (let copyIdx = 0; copyIdx < meta.copies; copyIdx++) {
-        meta.colArr.forEach((item, itemIdx) => {
+        meta.arr.forEach((item, itemIdx) => {
+          const id = `${c}-${copyIdx}-${itemIdx}`;
           const tile = document.createElement('div');
           tile.className = 'drift-wall__tile';
-          tile.dataset.tileId = `${c}-${copyIdx}-${itemIdx}`;
-          tile.dataset.col = c;
+          tile.dataset.tileId = id;
+          tile.dataset.col = String(c);
           tile.tabIndex = 0;
           tile.setAttribute('role', 'button');
           tile.setAttribute('aria-label', item.title || 'tile');
+          tile.innerHTML = `<span class="drift-wall__inner"><img src="${item.image}" alt="${item.title || ''}" loading="lazy" decoding="async" draggable="false"><span class="drift-wall__overlay" aria-hidden="true"></span></span>`;
 
-          tile.innerHTML = `
-            <span class="drift-wall__inner">
-              <img src="${item.image}" alt="${item.title || ''}" loading="lazy" decoding="async" draggable="false" />
-              <span class="drift-wall__overlay" aria-hidden="true"></span>
-            </span>
-          `;
-
-          // Direct tile hover events — eliminates 3D coordinate jitter
-          tile.addEventListener('pointerenter', () => {
-            if (activeTile && activeTile !== tile) {
-              activeTile.classList.remove('is-active');
-            }
-            activeTile = tile;
-            activeTile.classList.add('is-active');
-            hoveredCol = c;
-          });
-
-          tile.addEventListener('pointerleave', () => {
-            tile.classList.remove('is-active');
-            if (activeTile === tile) {
-              activeTile = null;
-              hoveredCol = -1;
-            }
-          });
+          tile.addEventListener('focus', () => { activeId = id; hoveredCol = c; tile.classList.add('is-active'); });
+          tile.addEventListener('blur',  () => { if (activeId === id) { activeId = null; hoveredCol = -1; } tile.classList.remove('is-active'); });
 
           trackEl.appendChild(tile);
         });
@@ -944,88 +926,89 @@
     container.innerHTML = '';
     container.appendChild(plane);
 
-    // State tracking
-    let activeTile = null;
-    let hoveredCol = -1;
-    let wallHovered = false;
-    const pointer = { x: 0, y: 0 };
-    const pointerDamped = { x: 0, y: 0 };
-    let lastTs = null;
-
-    const applyPlaneTransform = (px, py) => {
+    // ── Helper: apply 3D plane transform ──
+    const applyPlane = (px, py) => {
       plane.style.transform =
         `translate(-50%, -50%) scale(1.18) ` +
-        `rotateX(${config.tilt + py}deg) rotateY(${config.turn + px}deg) rotateZ(${config.roll}deg) ` +
-        `translateZ(${-config.depth}px)`;
+        `rotateX(${cfg.tilt + py}deg) rotateY(${cfg.turn + px}deg) rotateZ(${cfg.roll}deg) ` +
+        `translateZ(${-cfg.depth}px)`;
     };
+    applyPlane(0, 0);
 
-    container.addEventListener('pointerenter', () => {
-      wallHovered = true;
-    });
+    // ── Pointer tracking — exactly as in React source ──
+    container.addEventListener('pointerenter', () => { wallHovered = true; });
 
     container.addEventListener('pointerleave', () => {
       wallHovered = false;
       pointer.x = 0;
       pointer.y = 0;
-      if (activeTile) {
-        activeTile.classList.remove('is-active');
-        activeTile = null;
+      if (activeId) {
+        const prev = container.querySelector(`[data-tile-id="${activeId}"]`);
+        if (prev) prev.classList.remove('is-active');
+        activeId = null;
+        hoveredCol = -1;
       }
-      hoveredCol = -1;
     });
 
     container.addEventListener('pointermove', e => {
       const rect = container.getBoundingClientRect();
-      if (!rect) return;
-      if (config.parallax > 0 && !prefersReduced) {
-        pointer.x = Math.max(-0.5, Math.min(0.5, (e.clientX - rect.left) / rect.width - 0.5));
-        pointer.y = Math.max(-0.5, Math.min(0.5, (e.clientY - rect.top) / rect.height - 0.5));
+      if (cfg.parallax > 0 && !reduced) {
+        pointer.x = (e.clientX - rect.left) / rect.width - 0.5;
+        pointer.y = (e.clientY - rect.top) / rect.height - 0.5;
       }
+      // Use elementFromPoint just like the React source — but on the shadow DOM hit-test layer
+      const hit = document.elementFromPoint(e.clientX, e.clientY);
+      const tile = hit ? hit.closest('[data-tile-id]') : null;
+      const id = tile ? tile.dataset.tileId : null;
+      if (id === activeId) return; // same tile, no update needed (React: activeIdRef check)
+      if (activeId) {
+        const prev = container.querySelector(`[data-tile-id="${activeId}"]`);
+        if (prev) prev.classList.remove('is-active');
+      }
+      activeId = id;
+      hoveredCol = tile ? Number(tile.dataset.col) : -1;
+      if (tile) tile.classList.add('is-active');
     });
 
     if (window.ResizeObserver) {
-      const ro = new ResizeObserver(([entry]) => {
-        containerHeight = entry.contentRect.height || 600;
-      });
-      ro.observe(container);
+      new ResizeObserver(([e]) => { containerHeight = e.contentRect.height || 600; }).observe(container);
     }
 
+    // ── Animation loop ──
     function animate(ts) {
       if (lastTs === null) lastTs = ts;
-      const dt = Math.min(0.05, Math.max(0.001, (ts - lastTs) / 1000));
+      const dt = Math.min(0.05, (ts - lastTs) / 1000);
       lastTs = ts;
 
-      const maxTilt = config.parallax * 8;
-      const targetX = pointer.x * maxTilt;
-      const targetY = -pointer.y * maxTilt;
-      const damp = 1 - Math.exp(-dt / 0.14);
-      pointerDamped.x += (targetX - pointerDamped.x) * damp;
-      pointerDamped.y += (targetY - pointerDamped.y) * damp;
-      applyPlaneTransform(pointerDamped.x, pointerDamped.y);
+      // Damped pointer tilt (React: damp = 1 - exp(-dt/0.12))
+      if (cfg.parallax > 0 && !reduced) {
+        const maxT = cfg.parallax * 8;
+        const damp = 1 - Math.exp(-dt / 0.12);
+        pointerDamped.x += (pointer.x * maxT - pointerDamped.x) * damp;
+        pointerDamped.y += (-pointer.y * maxT - pointerDamped.y) * damp;
+      }
+      applyPlane(pointerDamped.x, pointerDamped.y);
 
-      if (!prefersReduced) {
+      if (!reduced) {
         for (let c = 0; c < trackRefs.length; c++) {
           const meta = columnMeta[c];
           if (!meta) continue;
-          const paused = wallHovered && config.pauseOnHover;
-          const factor = paused || hoveredCol === c ? 0 : 1;
+          const paused = wallHovered && cfg.pauseOnHover;
+          const factor = (paused || hoveredCol === c) ? 0 : 1;
           const target = baseVelocities[c] * factor;
-
-          const ease = 1 - Math.exp(-dt / (target === 0 ? 0.25 : 0.4));
+          const ease = 1 - Math.exp(-dt / (target === 0 ? 0.16 : 0.28));
           velocities[c] += (target - velocities[c]) * ease;
-          let next = (offsets[c] ?? 0) + velocities[c] * dt;
+          let next = (offsets[c] || 0) + velocities[c] * dt;
           next = ((next % meta.copyHeight) + meta.copyHeight) % meta.copyHeight;
           offsets[c] = next;
-
-          const el = trackRefs[c];
-          if (el) el.style.transform = `translate3d(0, ${-next}px, 0)`;
+          if (trackRefs[c]) trackRefs[c].style.transform = `translate3d(0,${-next}px,0)`;
         }
       }
 
-      requestAnimationFrame(animate);
+      rafId = requestAnimationFrame(animate);
     }
 
-    requestAnimationFrame(animate);
+    rafId = requestAnimationFrame(animate);
   }
 
   /* ── Initialization ───────────────────────────────────────────────── */

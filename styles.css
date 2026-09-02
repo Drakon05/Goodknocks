@@ -461,9 +461,7 @@ img {
   flex: 0 0 auto;
   outline: none;
   transform-style: preserve-3d;
-  pointer-events: auto;
   cursor: pointer;
-  backface-visibility: hidden;
 }
 
 .drift-wall__inner {
@@ -475,7 +473,7 @@ img {
   background: #ffffff;
   opacity: var(--dw-dim);
   transform: translateZ(0);
-  pointer-events: none;
+  /* Do NOT set pointer-events: none here — tiles need to receive events */
   box-shadow: 0 10px 30px -4px rgba(24, 23, 22, 0.12);
   will-change: transform, opacity, box-shadow;
   transition:
