@@ -733,18 +733,18 @@ img {
   transform: translateX(4px);
 }
 
-/* ── Story Section ────────────────────────────────────────────────────── */
+/* ── Story Section (Philosophy Page) ────────────────────────────────────────── */
 #story {
   justify-content: flex-start;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  padding-top: 70px;
-  padding-bottom: 160px;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .story-content {
   max-width: 700px;
-  padding: 0 28px;
+  padding: 100px 28px 160px;
   text-align: center;
   margin: 0 auto;
 }
