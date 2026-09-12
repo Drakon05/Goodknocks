@@ -603,11 +603,18 @@ img {
   font-size: clamp(1.5rem, 2.6vw, 2.1rem);
   font-weight: 400;
   line-height: 1.6;
-  color: var(--text-primary, #181716);
+  color: #2b2826;
   position: relative;
   z-index: 2;
-  margin: 24px 0 24px 24px;
+  margin: 32px 0 32px 24px;
   transform: rotate(-1.5deg);
+  background: #fcfbf8;
+  padding: 32px 42px;
+  border-radius: 2px 255px 3px 255px / 255px 5px 225px 3px;
+  border: 1px solid rgba(180, 165, 150, 0.2);
+  box-shadow: 
+    4px 6px 16px rgba(0, 0, 0, 0.06),
+    inset 0 0 60px rgba(190, 175, 160, 0.15);
 }
 
 .founder-wordmark {
@@ -630,6 +637,10 @@ img {
   .founder-right {
     text-align: center;
     align-items: center;
+  }
+  .founder-subtitle.statement-text {
+    padding: 24px 28px;
+    margin: 32px 16px;
   }
   .founder-wordmark {
     align-self: center;
