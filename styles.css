@@ -641,7 +641,7 @@ img {
   height: 100%;
   object-fit: cover;
   object-position: center;
-  filter: contrast(1.04) brightness(0.98);
+  filter: grayscale(1) contrast(1.1) brightness(0.95);
 }
 
 .founder-name-container {
