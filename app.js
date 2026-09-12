@@ -173,6 +173,60 @@
     });
   });
 
+  /* ── Swipe Navigation ─────────────────────────────────────────────── */
+  const swipeOrder = ['hero', 'story', 'step-body', 'step-wheels', 'step-accent'];
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  function handleSwipe() {
+    const threshold = 60; // minimum pixels to be considered a swipe
+    const currentIdx = swipeOrder.indexOf(state.currentSection);
+    
+    // Ignore swipe if we aren't in the main navigable flow
+    if (currentIdx === -1) return;
+
+    if (touchEndX < touchStartX - threshold) {
+      // Swiped left -> Next section
+      if (currentIdx < swipeOrder.length - 1) {
+        navigateTo(swipeOrder[currentIdx + 1]);
+      }
+    } else if (touchEndX > touchStartX + threshold) {
+      // Swiped right -> Previous section
+      if (currentIdx > 0) {
+        navigateTo(swipeOrder[currentIdx - 1]);
+      }
+    }
+  }
+
+  document.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+
+  document.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+  }, { passive: true });
+
+  let wheelTimeout;
+  document.addEventListener('wheel', (e) => {
+    // Only handle horizontal swipe if delta is mostly horizontal
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY) && Math.abs(e.deltaX) > 30) {
+      if (wheelTimeout) return;
+      wheelTimeout = setTimeout(() => { wheelTimeout = null; }, 800);
+
+      const currentIdx = swipeOrder.indexOf(state.currentSection);
+      if (currentIdx === -1) return;
+
+      if (e.deltaX > 0) {
+        // Scrolled right -> Next section
+        if (currentIdx < swipeOrder.length - 1) navigateTo(swipeOrder[currentIdx + 1]);
+      } else {
+        // Scrolled left -> Previous section
+        if (currentIdx > 0) navigateTo(swipeOrder[currentIdx - 1]);
+      }
+    }
+  }, { passive: true });
+
   /* ── CTA Buttons ──────────────────────────────────────────────────── */
   document.getElementById('cta-make-yours')?.addEventListener('click', () => {
     navigateTo('step-body');
