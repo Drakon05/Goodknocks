@@ -543,7 +543,12 @@ img {
   padding: 100px 4vw;
   overflow: hidden;
   box-sizing: border-box;
-  background: var(--bg-secondary, #eeebe1);
+  background-color: var(--bg-secondary, #eeebe1);
+  background-image: 
+    linear-gradient(rgba(129, 97, 62, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(129, 97, 62, 0.12) 1px, transparent 1px);
+  background-size: 32px 32px;
+  background-position: center center;
   z-index: 10;
 }
 
@@ -593,14 +598,15 @@ img {
 }
 
 .founder-subtitle.statement-text {
-  font-family: var(--font-display, sans-serif);
-  font-size: clamp(1.15rem, 2.2vw, 1.55rem);
+  font-family: 'Kalam', cursive;
+  font-size: clamp(1.5rem, 2.6vw, 2.1rem);
   font-weight: 400;
-  line-height: 1.5;
+  line-height: 1.6;
   color: var(--text-primary, #181716);
   position: relative;
   z-index: 2;
-  margin: 24px 0;
+  margin: 24px 0 24px 24px;
+  transform: rotate(-1.5deg);
 }
 
 @media (max-width: 1024px) {
