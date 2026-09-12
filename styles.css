@@ -245,7 +245,6 @@ img {
   background: rgba(18, 17, 16, 0.76);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(129, 97, 62, 0.3);
   border-radius: 18px;
   padding: 28px 34px;
   color: #ffffff;
