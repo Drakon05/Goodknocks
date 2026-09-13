@@ -610,6 +610,11 @@ img {
   transform: rotate(-1.5deg);
 }
 
+.founder-highlight {
+  color: #1d5145;
+  font-weight: 700;
+}
+
 .founder-wordmark {
   max-width: 340px;
   width: 95%;
