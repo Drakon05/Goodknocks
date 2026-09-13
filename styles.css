@@ -608,6 +608,7 @@ img {
   z-index: 2;
   margin: 24px 0 24px 24px;
   transform: rotate(-1.5deg);
+  display: block;
 }
 
 .founder-highlight {
