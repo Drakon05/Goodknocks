@@ -43,15 +43,15 @@
       desc: 'Velvet Linear · Silent Glide Architecture',
     },
     tactile: {
-      name: 'Silvertone Tactile',
-      fullName: 'Silvertone Tactile (55gf)',
+      name: 'Low-Profile Brown',
+      fullName: 'Low-Profile Brown (55gf · Tactile)',
       force: '55 gf',
-      pretravel: '1.5 mm',
+      pretravel: '1.2 mm',
       total: '3.2 mm',
-      acoustic: 'Articulate Clack',
-      stemColor: '#b76e79',
-      glow: 'rgba(183, 110, 121, 0.18)',
-      desc: 'Silvertone Tactile · Dual-Stage Bump Architecture',
+      acoustic: 'Creamy Tactile Bump',
+      stemColor: '#704214',
+      glow: 'rgba(112, 66, 20, 0.25)',
+      desc: 'Low-Profile Brown Tactile · 26mm Slim Architecture',
     },
     clicky: {
       name: 'Acoustic Click',
@@ -86,7 +86,7 @@
 
   const switchDescriptions = {
     linear: 'Frictionless POM glide rails with dry Krytox film coating',
-    tactile: 'Articulate tactile bump cam with progressive two-stage return',
+    tactile: 'Low-profile brown tactile bump cam with light Krytox coating for creamy actuation',
     clicky: 'Integrated stainless clickbar for vintage mechanical typewriter cadence',
   };
 
@@ -693,7 +693,7 @@
     const typedEl = document.getElementById('hero-typed-text');
     if (!typedEl) return;
 
-    const fullText = "The First Keystroke\nYou'll Never Forget";
+    const fullText = "The 75Knocks.\nThe Keystroke You'll Never Forget";
     let charIndex = 0;
     typedEl.textContent = '';
 
@@ -1110,6 +1110,50 @@
     rafId = requestAnimationFrame(animate);
   }
 
+  /* ── Audio Player (ASMR Sensory Experience) ────────────────────────── */
+  function initAudioPlayer() {
+    const audio = document.getElementById('kbAudio');
+    const heroBtn = document.getElementById('btn-hero-sound');
+    const floatBtn = document.getElementById('float-sound-btn');
+    if (!audio) return;
+
+    let isPlaying = false;
+
+    function toggleAudio() {
+      if (isPlaying) {
+        audio.pause();
+        isPlaying = false;
+        if (heroBtn) {
+          heroBtn.classList.remove('playing');
+          const span = heroBtn.querySelector('span');
+          if (span) span.textContent = 'Hear It';
+        }
+        if (floatBtn) {
+          floatBtn.classList.remove('playing');
+          const span = floatBtn.querySelector('span');
+          if (span) span.textContent = 'Hear ASMR';
+        }
+      } else {
+        audio.play().then(() => {
+          isPlaying = true;
+          if (heroBtn) {
+            heroBtn.classList.add('playing');
+            const span = heroBtn.querySelector('span');
+            if (span) span.textContent = 'Pause';
+          }
+          if (floatBtn) {
+            floatBtn.classList.add('playing');
+            const span = floatBtn.querySelector('span');
+            if (span) span.textContent = 'Pause ASMR';
+          }
+        }).catch(() => {});
+      }
+    }
+
+    if (heroBtn) heroBtn.addEventListener('click', toggleAudio);
+    if (floatBtn) floatBtn.addEventListener('click', toggleAudio);
+  }
+
   /* ── Initialization ───────────────────────────────────────────────── */
   function init() {
     updatePillNav('hero');
@@ -1118,6 +1162,7 @@
     initTypewriterEffect();
     initExplodedScrollVideo();
     initDriftWall();
+    initAudioPlayer();
   }
 
   if (document.fonts && document.fonts.ready) {

@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>75Knocks — GoodKnocks</title>
+  <meta name="description" content="The 75Knocks. A low-profile 75% mechanical keyboard engineered for those who know the difference. By GoodKnocks.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Satoshi:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+  <link rel="apple-touch-icon" href="logo-mark.png">
+  <link rel="stylesheet" href="75knocks.css">
+</head>
+<body>
+
+  <!-- ═══════════════════ NAV ═══════════════════ -->
+  <div class="nav-sticky-container" style="container-type: scroll-state; container-name: nav-bar;">
+    <nav class="nav" id="nav">
+      <a href="#" class="nav-logo" aria-label="GoodKnocks Home">
+        <img src="logo-mark.png" alt="GoodKnocks" class="nav-logo-mark">
+        <img src="wordmark-green.png" alt="GoodKnocks" class="nav-wordmark">
+      </a>
+      <ul class="nav-links">
+        <li><a href="#story">Story</a></li>
+        <li><a href="#specs">Specs</a></li>
+        <li><a href="#feel">Feel It</a></li>
+      </ul>
+      <a href="#reserve" class="nav-cta">Reserve Yours</a>
+    </nav>
+  </div>
+
+  <!-- ═══════════════════ HERO ═══════════════════ -->
+  <section class="hero" id="hero">
+    <!-- Scroll-driven parallax image layers -->
+    <div class="hero-bg-wrap">
+      <img
+        src="images/hero_75knocks_cafe.jpg"
+        alt="75Knocks keyboard in warm minimalist cafe setting"
+        class="hero-bg-img"
+        fetchpriority="high"
+        decoding="async"
+      >
+      <div class="hero-scrim"></div>
+      <div class="hero-grain" aria-hidden="true"></div>
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <span class="handwriting">beautifully minimal</span>
+        <span class="rule-line" aria-hidden="true"></span>
+        <span class="hero-tag">75% Low Profile</span>
+      </div>
+      <h1 class="hero-title">
+        <span class="hero-title-small">The</span>
+        <span class="hero-title-big">75Knocks</span>
+      </h1>
+      <p class="hero-subtitle">Precision-machined. Whisper-light. <br>The keyboard you reach for without thinking.</p>
+      <div class="hero-actions">
+        <a href="#reserve" class="btn-primary">Reserve Yours</a>
+        <button class="btn-sound" id="btnSound" aria-label="Play keyboard sound">
+          <svg class="sound-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+            <path class="sound-wave w1" d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+            <path class="sound-wave w2" d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+          </svg>
+          <span>Hear it</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="hero-scroll-hint" aria-hidden="true">
+      <span class="handwriting small">scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- Hidden audio player -->
+  <audio id="kbAudio" src="creamy-keyboard-asmr.mp3" preload="none" loop></audio>
+
+  <!-- ═══════════════════ STORY ═══════════════════ -->
+  <section class="section story-section" id="story">
+    <div class="story-grid">
+      <div class="story-text-col">
+        <span class="eyebrow">Our Philosophy</span>
+        <h2 class="section-title">Something worth<br><em>keeping</em></h2>
+        <div class="story-body">
+          <p>We make one keyboard. We make it right.</p>
+          <p>The 75Knocks was born from a simple conviction — that your daily instrument deserves the same quiet permanence as your best pen, your favourite chair, the mug you always reach for first. Not a gadget. A companion.</p>
+          <p>Every detail — the 26mm slim unibody, the low-profile brown tactile switches, the whisper of the 3,000mAh battery that never dies at the wrong moment — exists because it earns its place.</p>
+        </div>
+        <div class="story-values">
+          <div class="story-val">
+            <span class="val-num">01</span>
+            <div>
+              <span class="val-label">One keyboard</span>
+              <span class="val-desc">Singular focus. No compromises, no noise.</span>
+            </div>
+          </div>
+          <div class="story-val">
+            <span class="val-num">02</span>
+            <div>
+              <span class="val-label">Feel by design</span>
+              <span class="val-desc">Low-profile tactile — deliberate, not accidental.</span>
+            </div>
+          </div>
+          <div class="story-val">
+            <span class="val-num">03</span>
+            <div>
+              <span class="val-label">Built to outlast</span>
+              <span class="val-desc">3,000mAh. Hot-swap PCB. Made to be kept.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="story-img-col">
+        <div class="story-img-stack">
+          <div class="story-img-card card-back">
+            <img
+              src="anodisation-options/02_Grey_Anodised/view2_front.jpg"
+              alt="75Knocks grey anodised front view"
+              loading="lazy"
+              decoding="async"
+            >
+          </div>
+          <div class="story-img-card card-front">
+            <img
+              src="anodisation-options/03_New_Grey_Anodised/view1_perspective.jpg"
+              alt="75Knocks perspective view"
+              loading="lazy"
+              decoding="async"
+            >
+            <div class="card-annotation">
+              <span class="handwriting">26 mm thin</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ FEATURE MARQUEE ═══════════════════ -->
+  <div class="marquee-track" aria-hidden="true">
+    <div class="marquee-inner">
+      <span>Low Profile Brown Tactile</span><span class="dot">·</span>
+      <span>XVX PBT Double-Shot Keycaps</span><span class="dot">·</span>
+      <span>Light-Up Legends</span><span class="dot">·</span>
+      <span>3000mAh Battery</span><span class="dot">·</span>
+      <span>Hot-Swap PCB</span><span class="dot">·</span>
+      <span>26mm Ultra-Slim</span><span class="dot">·</span>
+      <span>75% Layout</span><span class="dot">·</span>
+      <span>Low Profile Brown Tactile</span><span class="dot">·</span>
+      <span>XVX PBT Double-Shot Keycaps</span><span class="dot">·</span>
+      <span>Light-Up Legends</span><span class="dot">·</span>
+      <span>3000mAh Battery</span><span class="dot">·</span>
+      <span>Hot-Swap PCB</span><span class="dot">·</span>
+      <span>26mm Ultra-Slim</span><span class="dot">·</span>
+      <span>75% Layout</span><span class="dot">·</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ COLOURWAYS ═══════════════════ -->
+  <section class="section colourways-section" id="colours">
+    <div class="colourways-header">
+      <span class="eyebrow">Finishes</span>
+      <h2 class="section-title">Choose your<br><em>canvas</em></h2>
+      <p class="section-sub">Three anodised finishes. Each one studied until it felt right.</p>
+    </div>
+
+    <div class="colourways-grid">
+
+      <div class="colourway-card" data-colour="satin">
+        <div class="colourway-img-wrap">
+          <img
+            src="anodisation-options/01_SS_Brush_Satin/view1_perspective.jpg"
+            alt="75Knocks Satin Stainless"
+            loading="lazy"
+            decoding="async"
+          >
+        </div>
+        <div class="colourway-info">
+          <div class="colourway-swatch" style="background: linear-gradient(135deg, #b0aeaa, #d8d6d2, #9e9c99);"></div>
+          <div>
+            <span class="colourway-name">Satin Stainless</span>
+            <span class="colourway-desc handwriting">the quiet one</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="colourway-card" data-colour="grey">
+        <div class="colourway-img-wrap">
+          <img
+            src="anodisation-options/02_Grey_Anodised/view1_perspective.jpg"
+            alt="75Knocks Grey Anodised"
+            loading="lazy"
+            decoding="async"
+          >
+        </div>
+        <div class="colourway-info">
+          <div class="colourway-swatch" style="background: linear-gradient(135deg, #6a6b6a, #878888, #5d5e5d);"></div>
+          <div>
+            <span class="colourway-name">Storm Grey</span>
+            <span class="colourway-desc handwriting">never tries too hard</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="colourway-card" data-colour="slate">
+        <div class="colourway-img-wrap">
+          <img
+            src="anodisation-options/03_New_Grey_Anodised/view1_perspective.jpg"
+            alt="75Knocks New Grey Anodised"
+            loading="lazy"
+            decoding="async"
+          >
+        </div>
+        <div class="colourway-info">
+          <div class="colourway-swatch" style="background: linear-gradient(135deg, #4a4f52, #606669, #3f4345);"></div>
+          <div>
+            <span class="colourway-name">Slate Dusk</span>
+            <span class="colourway-desc handwriting">for late nights</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════ SPECS ═══════════════════ -->
+  <section class="section specs-section" id="specs">
+    <div class="specs-inner">
+      <div class="specs-left">
+        <span class="eyebrow">Engineering</span>
+        <h2 class="section-title">Every number<br>earns its place</h2>
+        <p class="section-sub">No spec is here for marketing. Everything below changes how it feels under your hands.</p>
+
+        <div class="specs-annotation">
+          <span class="handwriting large">the details</span>
+          <svg class="annotation-arrow" width="60" height="40" viewBox="0 0 60 40" fill="none">
+            <path d="M5 5 C10 20, 40 25, 55 35" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+            <path d="M50 28 L55 35 L48 33" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="specs-right">
+        <div class="spec-grid">
+          <div class="spec-row">
+            <span class="spec-label">Layout</span>
+            <span class="spec-value">75% — 84 keys</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">Switch</span>
+            <span class="spec-value">Low Profile Brown Tactile</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">Keycaps</span>
+            <span class="spec-value">XVX PBT Double-Shot</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">Legends</span>
+            <span class="spec-value">Light-Up (per-key LED)</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">Battery</span>
+            <span class="spec-value">3,000 mAh</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">Profile</span>
+            <span class="spec-value">26 mm slim unibody</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">PCB</span>
+            <span class="spec-value">Hot-Swap 5-pin</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">Connectivity</span>
+            <span class="spec-value">USB-C · Bluetooth 5.1</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">Case</span>
+            <span class="spec-value">Anodised Aluminium Unibody</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">Compatibility</span>
+            <span class="spec-value">Mac · Windows · Linux</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Side-scroll detail renders -->
+    <div class="specs-render-strip">
+      <div class="render-strip-inner">
+        <div class="render-item">
+          <img src="anodisation-options/01_SS_Brush_Satin/view2_front.jpg" alt="Front view" loading="lazy">
+          <span class="handwriting render-label">front face</span>
+        </div>
+        <div class="render-item">
+          <img src="anodisation-options/01_SS_Brush_Satin/view3_back.jpg" alt="Back view" loading="lazy">
+          <span class="handwriting render-label">the chassis</span>
+        </div>
+        <div class="render-item">
+          <img src="anodisation-options/02_Grey_Anodised/view2_front.jpg" alt="Storm Grey front" loading="lazy">
+          <span class="handwriting render-label">storm grey</span>
+        </div>
+        <div class="render-item">
+          <img src="anodisation-options/03_New_Grey_Anodised/view3_back.jpg" alt="Slate Dusk back" loading="lazy">
+          <span class="handwriting render-label">slate dusk</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ FEEL SECTION ═══════════════════ -->
+  <section class="section feel-section" id="feel">
+    <div class="feel-inner">
+      <div class="feel-text">
+        <span class="eyebrow">The Sound</span>
+        <h2 class="section-title">Close your eyes.<br><em>Now type.</em></h2>
+        <p class="section-sub">Low-profile tactile switches with a bump you can feel but not fight. The kind of typing that makes you want to write more.</p>
+        <button class="btn-sound feel-sound-btn" id="btnSound2" aria-label="Play keyboard sound">
+          <svg class="sound-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+            <path class="sound-wave w1" d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+            <path class="sound-wave w2" d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+          </svg>
+          <span>Play the ASMR</span>
+        </button>
+      </div>
+
+      <div class="feel-visual">
+        <div class="feel-img-wrap">
+          <img
+            src="images/macro_keycaps_brown_switch.jpg"
+            alt="75Knocks low-profile brown switch and XVX PBT keycap macro detail"
+            loading="lazy"
+            decoding="async"
+          >
+          <div class="feel-badge">
+            <span class="handwriting large">low profile</span>
+            <span class="feel-badge-sub">Brown Tactile</span>
+          </div>
+        </div>
+        <!-- Waveform visualiser (animated via CSS) -->
+        <div class="waveform" id="waveform" aria-hidden="true">
+          <div class="waveform-bar"></div>
+          <div class="waveform-bar"></div>
+          <div class="waveform-bar"></div>
+          <div class="waveform-bar"></div>
+          <div class="waveform-bar"></div>
+          <div class="waveform-bar"></div>
+          <div class="waveform-bar"></div>
+          <div class="waveform-bar"></div>
+          <div class="waveform-bar"></div>
+          <div class="waveform-bar"></div>
+          <div class="waveform-bar"></div>
+          <div class="waveform-bar"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ FULL-BLEED RENDER ═══════════════════ -->
+  <section class="fullbleed-section" aria-hidden="false">
+    <div class="fullbleed-wrap">
+      <img
+        src="images/lifestyle_cafe_workspace.jpg"
+        alt="75Knocks in an upscale boutique cafe workspace"
+        class="fullbleed-img"
+        loading="lazy"
+        decoding="async"
+      >
+      <div class="fullbleed-scrim"></div>
+      <div class="fullbleed-caption">
+        <span class="handwriting large">yours to keep</span>
+        <p>The 75Knocks. Built for the long run.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ RESERVE ═══════════════════ -->
+  <section class="section reserve-section" id="reserve">
+    <div class="reserve-inner">
+      <div class="reserve-badge">
+        <img src="logo-mark.png" alt="GoodKnocks" class="reserve-logo">
+      </div>
+      <h2 class="reserve-title">Reserve the<br>75Knocks</h2>
+      <p class="reserve-sub">First batch is limited. Leave your email and we'll tell you the moment it opens.</p>
+
+      <form class="reserve-form" id="reserveForm" novalidate>
+        <div class="form-row">
+          <input
+            type="email"
+            name="email"
+            id="reserveEmail"
+            placeholder="your@email.com"
+            autocomplete="email"
+            required
+            class="form-input"
+          >
+          <button type="submit" class="btn-primary form-submit">Notify Me</button>
+        </div>
+        <p class="form-legal">No spam. Just one email when it's ready.</p>
+        <div class="form-success" id="formSuccess" hidden>
+          <span class="handwriting large">you're on the list</span>
+          <p>We'll be in touch.</p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ FOOTER ═══════════════════ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="wordmark-green.png" alt="GoodKnocks" class="footer-wordmark">
+        <span class="footer-tagline">One keyboard. Made right.</span>
+      </div>
+      <nav class="footer-nav">
+        <a href="#story">Story</a>
+        <a href="#specs">Specs</a>
+        <a href="#reserve">Reserve</a>
+      </nav>
+      <p class="footer-copy">© 2026 GoodKnocks. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="75knocks.js" defer></script>
+</body>
+</html>

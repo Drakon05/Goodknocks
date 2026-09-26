@@ -3,12 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>GoodKnocks — The Heirloom Low-Profile Keyboard</title>
+  <title>GoodKnocks 75Knocks — The Heirloom Low-Profile Keyboard</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+  <link rel="apple-touch-icon" href="logo-mark.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,600,700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -44,29 +45,43 @@
 
         <!-- ── SECTION 1: HERO CONTENT (0% -> 20%) ── -->
         <div class="hero-content-layer" id="hero-content-layer">
-          <img src="GoodKnocksa logo.png" alt="GoodKnocks" class="hero-logo">
-          <h1 class="hero-title" aria-label="The First Keystroke You'll Never Forget">
+          <div class="hero-brand-wrap">
+            <img src="logo-mark-white.png" alt="GoodKnocks Monogram" class="hero-brand-mark">
+            <img src="wordmark-white.png" alt="GoodKnocks" class="hero-brand-wordmark">
+            <span class="hero-edition-tag handwriting">75Knocks</span>
+          </div>
+          <h1 class="hero-title" aria-label="The 75Knocks: The Keystroke You'll Never Forget">
             <span class="hero-typed-text" id="hero-typed-text"></span><span class="typing-cursor" id="typing-cursor" aria-hidden="true"></span>
           </h1>
           <p class="hero-subtitle">
             Machined to be trusted. Sculpted to be cherished.<br>
-            Your first bespoke instrument should carry the quiet weight of honor and pride.
+            The 75Knocks: 26mm slim unibody, low-profile brown tactile switches &amp; double-shot XVX PBT keycaps.
           </p>
-          <button class="cta-button" id="cta-make-yours">
-            <span>Craft Yours Now</span>
-            <svg class="cta-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
-          </button>
+          <div class="hero-actions-group">
+            <button class="cta-button" id="cta-make-yours">
+              <span>Craft Yours Now</span>
+              <svg class="cta-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </button>
+            <button class="btn-sound-hero" id="btn-hero-sound" aria-label="Play keyboard acoustic sound">
+              <svg class="sound-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+                <path class="sound-wave w1" d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+                <path class="sound-wave w2" d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+              </svg>
+              <span>Hear It</span>
+            </button>
+          </div>
         </div>
 
         <!-- ── DISASSEMBLY ACOUSTIC STORYTELLING (Single card at end of sequence) ── -->
         <div class="explode-callout-overlay">
           <div class="explode-card" id="explode-summary-card">
-            <span class="explode-eyebrow">Acoustic Architecture</span>
-            <h2 class="explode-title">Monolithic Resonance Chamber</h2>
+            <span class="explode-eyebrow">75Knocks Architecture</span>
+            <h2 class="explode-title">26mm Monolithic Unibody</h2>
             <p class="explode-desc">
-              Precision CNC-machined 6063 aerospace aluminum unibody with custom Poron gasket dampening, isolated IXPE switch pads, and internal brass balancing weights for deep, satisfying low-end harmonics.
+              Precision CNC-machined aerospace aluminum unibody at 26mm profile with custom Poron gasket dampening, low-profile brown tactile switches, double-shot XVX PBT keycaps with light-up legends, and 3,000mAh battery for pure acoustic resonance.
             </p>
           </div>
         </div>
@@ -98,9 +113,10 @@
         <!-- Right 2/3: Details -->
         <div class="founder-right">
           <p class="founder-subtitle statement-text">
+            <span class="founder-quote-tag handwriting" style="font-size:1.6rem; color:var(--brand-green); margin-bottom:8px; display:block;">crafted for permanence</span>
             There is no such thing as a small detail when you are making something truly <span class="founder-highlight">special</span>. The little things are what make it yours.
           </p>
-          <img src="goodknocks-wordmark.png" alt="GoodKnocks" class="founder-wordmark" loading="lazy">
+          <img src="wordmark-green.png" alt="GoodKnocks" class="founder-wordmark" loading="lazy">
         </div>
       </div>
     </div>
@@ -120,22 +136,22 @@
         <div class="story-value">
           <span class="value-number">01</span>
           <div class="value-text">
-            <span class="value-label">Reliability You Can Feel</span>
-            <span class="value-desc">Custom gasket suspension and hot-swappable sockets rated for fifty million flawless actuations.</span>
+            <span class="value-label">Low-Profile Brown Tactile</span>
+            <span class="value-desc">Custom gasket suspension, pre-lubed POM stem, and double-shot XVX PBT keycaps with illuminated legends rated for 50M keystrokes.</span>
           </div>
         </div>
         <div class="story-value">
           <span class="value-number">02</span>
           <div class="value-text">
-            <span class="value-label">Sculpted Low-Profile Unibody</span>
-            <span class="value-desc">Zero wrist strain by design. Slim, ergonomic contours precision CNC-milled with sub-micron tolerances.</span>
+            <span class="value-label">Sculpted 26mm Unibody</span>
+            <span class="value-desc">Zero wrist strain by design. Slim low-profile contours precision CNC-milled with sub-micron tolerances from aerospace aluminum.</span>
           </div>
         </div>
         <div class="story-value">
           <span class="value-number">03</span>
           <div class="value-text">
-            <span class="value-label">Pride in Every Keystroke</span>
-            <span class="value-desc">A deep acoustic signature tuned like a concert piano. An instrument you feel genuine honor to create upon.</span>
+            <span class="value-label">3,000mAh Endurance &amp; Hot-Swap</span>
+            <span class="value-desc">Deep acoustic signature tuned like a concert piano. Built with multi-week battery life and universal 5-pin hot-swap flexibility.</span>
           </div>
         </div>
       </div>
@@ -565,7 +581,7 @@
                   <circle cx="20" cy="15" r="2.5" fill="currentColor"/>
                 </svg>
               </div>
-              <span class="option-name">Silvertone Tactile <span class="mobile-hide-metric">(55gf)</span></span>
+              <span class="option-name">Low-Profile Brown <span class="mobile-hide-metric">(55gf · Tactile)</span></span>
             </button>
             <button class="option-card switch-option" data-switch="clicky">
               <div class="switch-icon">
@@ -926,6 +942,17 @@
       <div class="pill-nav-indicator"></div>
     </div>
   </nav>
+
+  <!-- Audio Player & Floating Sound Trigger -->
+  <audio id="kbAudio" src="creamy-keyboard-asmr.mp3" preload="none" loop></audio>
+  <button class="sound-float-pill" id="float-sound-btn" aria-label="Toggle Keyboard ASMR">
+    <svg class="sound-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+      <path class="sound-wave w1" d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+      <path class="sound-wave w2" d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+    </svg>
+    <span>Hear ASMR</span>
+  </button>
 
   <script src="app.js"></script>
 </body>
